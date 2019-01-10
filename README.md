@@ -10,6 +10,7 @@
     * Player can move ship around/choose direction for ship to follow (Either with arrow keys or mouse drag).
     * Asteroids are generated and move     toward the ship. Asteroids come in from all direnctions.
     * Asteroids cause player to loose upon collision. 
+    * Music as background while game is in session.
 
     ## Architecture and Technologies
     * Vanilla JavaScript for game logic.
