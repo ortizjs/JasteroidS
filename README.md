@@ -1,7 +1,7 @@
 * JanimateS
 
     ## Background and Overview:
-    * JanimateS is a similar game to the asteroids javascript game where the player is represented by a ship/circle in the canvas/space. There will astoroids coming from all directions into close proximity to the user's ship. The way the user can defend or play is by choosing a direction with the arrow keys and by cliking on the incoming asteroids to make them dissapear. 
+    * JanimateS is a similar game to the asteroids javascript game where the player is represented by a ship/circle in the canvas/space. There will astoroids coming from all directions into close proximity to the user's ship. The way the user can defend or play is by choosing a direction with the arrow keys (want to incorporate following the mouse) and by cliking on the incoming asteroids to make them dissapear. 
 
     * Motivation for the game was the visualization and physics challenge behind the game. I like the idea of the game and the simplicity presented to the user. 
 
@@ -28,4 +28,4 @@
     * Day 7: Finish audio and final touches.
 
     ## Wireframe: 
-    ![](./)
+    ![](./imgs/wireframe.jpeg)
