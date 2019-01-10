@@ -1,24 +1,31 @@
 * JanimateS
-* Background and Overview:
-    * JanimateS is a similar game to the asteroids javascript game where the player is represented by a ship/circle in the canvas. There will be other astoroids coming from all directions into close proximity to the user's ship. The way the user can defend or play is by choosing a direction with the arrow keys and by cliking on the incoming asteroids to make them dissapear. 
+
+    ## Background and Overview:
+    * JanimateS is a similar game to the asteroids javascript game where the player is represented by a ship/circle in the canvas/space. There will astoroids coming from all directions into close proximity to the user's ship. The way the user can defend or play is by choosing a direction with the arrow keys and by cliking on the incoming asteroids to make them dissapear. 
 
     * Motivation for the game was the visualization and physics challenge behind the game. I like the idea of the game and the simplicity presented to the user. 
 
-* Functionality and MVP Features
+    ## Functionality and MVP Features
     * Basic visuals/interactive interface.
-    * Player can move ship around/choose direction for ship to follow.
-    * Asteroids are generate and move     toward the ship.
-    * Asteroids cause 'Game Over' upon collision. 
+    * Player can move ship around/choose direction for ship to follow (Either with arrow keys or mouse drag).
+    * Asteroids are generated and move     toward the ship. Asteroids come in from all direnctions.
+    * Asteroids cause player to loose upon collision. 
 
-* Architecture and Technologies
+    ## Architecture and Technologies
     * Vanilla JavaScript for game logic.
     * HTML5 Canvas for rendering.
-    * Howler.js (or HTML audio player) for game   background music.
+    * Howler.js (or HTML audio player) for game   background music. (bonus)
+    * Tree.js for animation and 3D. (Bonus)
     * Webpack to bundle various scripts into a    single source.
 
-* Implementation Timeline
-    * day 1: finish brainstorming and researching technologies and libraries. Review projects from currilculum and notes that will provide better understanding of concepts
-    * day 2: Start project, project skeleton. Get started on first MVP: Basic visual rendering/interface.
-    * day 3: Continue working on first MVP and get started on second MVP: allowing player to move, choose direction.
-    * day 4: Finish player mobility. Start Asteroids generation and mobility logic.
-    * day 5: Finish game collision logic.
+    ## Implementation Timeline
+    * Day 1: Finish brainstorming and researching technologies and libraries. Start reviewing projects from curriculum and notes that will provide better understanding of concepts to use in project.
+    * Day 2: Start project skeleton. Get started on first MVP: Basic visual rendering/interface.
+    * Day 3: Continue working and ideally finish first MVP and get started on second MVP: allowing player to move, choose direction of ship.
+    * Day 4: Finish player/ship mobility. Ideally start asteroids generation and mobility logic.
+    * Day 5: Finish asteroids generation collision logic.
+    * Day 6: Start audio implementation while game is being played. 
+    * Day 7: Finish audio and final touches.
+
+    ## Wireframe: 
+    ![](./)
