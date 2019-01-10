@@ -13,11 +13,22 @@
     * Music as background while game is in session.
 
     ## Architecture and Technologies
-    * Vanilla JavaScript for game logic.
-    * HTML5 Canvas for rendering.
-    * Howler.js (or HTML audio player) for game   background music. (bonus)
-    * Tree.js for animation and 3D. (Bonus)
-    * Webpack to bundle various scripts into a    single source.
+    * Vanilla JavaScript:
+        * Game logic.
+    * HTML5 Canvas: 
+        * Rendering and visualization.
+    * Howler.js (or HTML audio player): 
+        * Game background music. (bonus)
+    * Tree.js: 
+        * Animation and 3D. (Bonus)
+    * Webpack: 
+        * Bundle various scripts into a    single source.
+        * asteroid.js: 
+            - Moving asteroids code.
+        * game.js:
+            - Main game logi code.
+        * game_view.js:
+            - Store the gameView instances and canvas code. 
 
     ## Implementation Timeline
     * Day 1: Finish brainstorming and researching technologies and libraries. Start reviewing projects from curriculum and notes that will provide better understanding of concepts to use in project.
