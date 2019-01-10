@@ -26,7 +26,7 @@
         * asteroid.js: 
             - Moving asteroids code.
         * game.js:
-            - Main game logi code.
+            - Main game logic code.
         * game_view.js:
             - Store the gameView instances and canvas code. 
 
