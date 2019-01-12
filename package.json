@@ -1,0 +1,25 @@
+{
+  "name": "janimates",
+  "version": "1.0.0",
+  "description": "Javascript game",
+  "private": true,
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack --watch --mode=development",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ortizjs/JanimateS.git"
+  },
+  "author": "Jonnatan Ortiz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ortizjs/JanimateS/issues"
+  },
+  "homepage": "https://github.com/ortizjs/JanimateS#readme",
+  "dependencies": {
+    "lodash": "^4.17.11"
+  }
+}
