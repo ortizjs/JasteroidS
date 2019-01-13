@@ -7,8 +7,8 @@ class Display {
         this.ship = new Ship(canvasWidth, canvasHeight, ctx);
         this.keyDown = this.keyDown.bind(this);
         this.keyUp = this.keyUp.bind(this);
-        this.FPS = 30;
-        this.friction = 0.7;
+        this.FPS = 30;  // frames per seconds
+        this.friction = 0.7; //friction of spaceship (0 - 1) 
 
         document.addEventListener("keydown", this.keyDown);
         document.addEventListener("keyup", this.keyUp);
@@ -28,13 +28,13 @@ class Display {
     keyDown(event) {
         switch (event.keyCode) {
             case 37: // left arrow down = rotation ship left
-                this.ship.rotation = this.turnSpeed / 180 * Math.PI / this.FPS;
+                this.ship.rotation = this.ship.turnSpeed / 180 * Math.PI / this.FPS;
                 break;
             case 38: // up arrow down = thrust the ship forward
                 this.ship.thrusting = true;
                 break;
             case 39: //right arrow down = rotation ship right
-                this.ship.rotation = - this.turnSpeed / 180 * Math.PI / this.FPS;
+                this.ship.rotation = - this.ship.turnSpeed / 180 * Math.PI / this.FPS;
                 break;
         }
     }
@@ -63,8 +63,8 @@ class Display {
         
         // thrust the ship
         if (this.ship.thrusting) {
-            this.ship.thrust.x += this.shipThrust * Math.cos(this.ship.angle) / this.FPS;
-            this.ship.thrust.y -= this.shipThrust * Math.sin(this.ship.angle) / this.FPS;
+            this.ship.thrust.x += this.ship.shipThrust * Math.cos(this.ship.angle) / this.FPS;
+            this.ship.thrust.y -= this.ship.shipThrust * Math.sin(this.ship.angle) / this.FPS;
 
 
         } else {

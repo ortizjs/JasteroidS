@@ -3,7 +3,7 @@ class Ship {
     constructor (canvasHeight, canvasWidth, ctx) {
         this.canvasHeight = canvasHeight;
         this.canvasWidth = canvasWidth;
-        this.shipSize = 30;
+        this.shipSize = 30; // ship height in px
         this.ctx = ctx;
         this.x = canvasWidth / 2;
         this.y = canvasHeight / 2;
@@ -13,6 +13,9 @@ class Ship {
         this.thrusting = false;
         this.shipThrust = 5;
         this.turnSpeed = 360;
+        this.thrustX = 0;        
+        this.thrustY = 0;        
+
         this.thrust = {
             x: 0,
             y: 0

@@ -22,18 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const turnSpeed = 360; //Turn speed in degrees per second
     const shipThrust = 5; //acceleration of the ship in pixels per second per second
     const friction = 0.7; //friction of spaceship (0 - 1)
-    
-    
-
-    // canvasEl.height = window.innerHeight;
-    // canvasEl.width = window.innerWidth;
-    // canvasEl.width = Game.DIM_X;
-    // canvasEl.hight = Game.DIM_Y;
-    // canvasEl.width = 400;
-    // canvasEl.hight = 400;
-
-    // var ctx = canvasEl.getContext('2d');
-    // ctx.fillStyle = "black";
 
 
     // var ship = {
