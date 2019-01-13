@@ -12,13 +12,16 @@ document.addEventListener("DOMContentLoaded", () => {
     var canv = document.getElementById('game-canvas');
     let canvasWidth = canv.width; 
     let canvasHeight = canv.height; 
+    let ctx = canv.getContext('2d'); 
+    let game = new Display(canvasWidth, canvasHeight, ctx);
+    game.startGame();
+
 
     const FPS = 30; // frames per seconds
     const shipSize = 30; // ship height in px
     const turnSpeed = 360; //Turn speed in degrees per second
     const shipThrust = 5; //acceleration of the ship in pixels per second per second
     const friction = 0.7; //friction of spaceship (0 - 1)
-    var ctx = canv.getContext('2d'); 
     
     
 
@@ -46,62 +49,62 @@ document.addEventListener("DOMContentLoaded", () => {
     //     }
     // };
 
+    // let ship = new Ship(canvasHeight, canvasWidth, ctx);
+    // ship.drawShip();
 
 
     //Set up event handlers
-    document.addEventListener("keydown", keyDown);
-    document.addEventListener("keyup", keyUp);
+    // document.addEventListener("keydown", keyDown);
+    // document.addEventListener("keyup", keyUp);
 
-    function keyDown(event) {
-        switch(event.keyCode) {
-            case 37: // left arrow down = rotation ship left
-                ship.rotation = turnSpeed / 180 * Math.PI / FPS; 
-                break;
-            case 38: // up arrow down = thrust the ship forward
-                ship.thrusting = true;
-                break;
-            case 39: //right arrow down = rotation ship right
-                ship.rotation = - turnSpeed / 180 * Math.PI / FPS; 
-                break;
-        }
+    // function keyDown(event) {
+    //     switch(event.keyCode) {
+    //         case 37: // left arrow down = rotation ship left
+    //             ship.rotation = turnSpeed / 180 * Math.PI / FPS; 
+    //             break;
+    //         case 38: // up arrow down = thrust the ship forward
+    //             ship.thrusting = true;
+    //             break;
+    //         case 39: //right arrow down = rotation ship right
+    //             ship.rotation = - turnSpeed / 180 * Math.PI / FPS; 
+    //             break;
+    //     }
             
-    }
+    // }
 
-    function keyUp(event) {
-        switch (event.keyCode) {
-            case 37: // left arrow up = stop rotating ship left
-                ship.rotation = 0;
-                break;
-            case 38: // up arrow up = stop thrusting
-                ship.thrusting = false;
-                break;
-            case 39: //right arrow up = stop rotating ship right
-                ship.rotation = 0;
-                break;
-        }
-    }
+    // function keyUp(event) {
+    //     switch (event.keyCode) {
+    //         case 37: // left arrow up = stop rotating ship left
+    //             ship.rotation = 0;
+    //             break;
+    //         case 38: // up arrow up = stop thrusting
+    //             ship.thrusting = false;
+    //             break;
+    //         case 39: //right arrow up = stop rotating ship right
+    //             ship.rotation = 0;
+    //             break;
+    //     }
+    // }
 
         // set up the game loop:
-    setInterval(update, 1000 / FPS);
-    function update () {
+    // setInterval(update, 1000 / FPS);
+    // function update () {
         // draw space 
-        ctx.fillStyle = "black";
-        ctx.fillRect(0, 0, canv.width, canv.height);
+        // ctx.fillStyle = "blue";
+        // ctx.fillRect(0, 0, canv.width, canv.height);
 
         // draw the player ship
-        let ship = new Ship(canvasHeight, canvasWidth, ctx);
-        ship.drawShip();
-        
+        // ship.drawShip();
         // thrust the ship
-        if (ship.thrusting) {
-            ship.thrust.x += shipThrust * Math.cos(ship.angle) /  FPS;
-            ship.thrust.y -= shipThrust * Math.sin(ship.angle) /  FPS;
+        // if (ship.thrusting) {
+        //     ship.thrust.x += shipThrust * Math.cos(ship.angle) /  FPS;
+        //     ship.thrust.y -= shipThrust * Math.sin(ship.angle) /  FPS;
 
 
-        } else {
-            ship.thrust.x -= friction * ship.thrust.x / FPS;
-            ship.thrust.y -= friction * ship.thrust.y / FPS;
-        }
+        // } else {
+        //     ship.thrust.x -= friction * ship.thrust.x / FPS;
+        //     ship.thrust.y -= friction * ship.thrust.y / FPS;
+        // }
         
         // draw the player ship
         // ctx.strokeStyle = "white",
@@ -128,28 +131,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         //rotate ship
-        ship.angle += ship.rotation;
+        // ship.angle += ship.rotation;
 
-        //move the ship
-        ship.x += ship.thrust.x;
-        ship.y += ship.thrust.y;
+        // //move the ship
+        // ship.x += ship.thrust.x;
+        // ship.y += ship.thrust.y
+        
+        ;
 
         //handle edge of screen
-        if (ship.x < 0 - ship.radious) {
-            ship.x = canv.width + ship.radious;
-        } else if (ship.x > canv.width + ship.radious) {
-            ship.x = 0 - ship.radious;
-        }
-        if (ship.y < 0 - ship.radious) {
-            ship.y = canv.height + ship.radious;
-        } else if (ship.y > canv.height + ship.radious) {
-            ship.y = 0 - ship.radious;
-        }
+        // if (ship.x < 0 - ship.radious) {
+        //     ship.x = canv.width + ship.radious;
+        // } else if (ship.x > canv.width + ship.radious) {
+        //     ship.x = 0 - ship.radious;
+        // }
+        // if (ship.y < 0 - ship.radious) {
+        //     ship.y = canv.height + ship.radious;
+        // } else if (ship.y > canv.height + ship.radious) {
+        //     ship.y = 0 - ship.radious;
+        // }
+
 
         //centre dot 
-        ctx.fillStyle = "red";
-        ctx.fillRect(ship.x - 1, ship.y - 1, 2, 2);
-    }
+    //     ctx.fillStyle = "red";
+    //     ctx.fillRect(ship.x - 1, ship.y - 1, 2, 2);
+    // }
 
 });
 
