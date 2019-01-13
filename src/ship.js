@@ -12,7 +12,7 @@ class Ship {
         this.rotation = 0;
         this.thrusting = false;
         this.shipThrust = 5; //acceleration of the ship in pixels per second per second
-        this.turnSpeed = 360; //Turn speed in degrees per second
+        this.turnSpeed = 150; //Turn speed in degrees per second (check 360 if need to)
         this.thrustX = 0;        
         this.thrustY = 0;        
 
