@@ -11,8 +11,8 @@ class Ship {
         this.angle = 90 / 180 * Math.PI; // to convert to radians 
         this.rotation = 0;
         this.thrusting = false;
-        this.shipThrust = 5;
-        this.turnSpeed = 360;
+        this.shipThrust = 5; //acceleration of the ship in pixels per second per second
+        this.turnSpeed = 360; //Turn speed in degrees per second
         this.thrustX = 0;        
         this.thrustY = 0;        
 

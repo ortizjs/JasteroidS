@@ -82,6 +82,18 @@ class Display {
         // centre dot 
         this.ctx.fillStyle = "red";
         this.ctx.fillRect(this.ship.x - 1, this.ship.y - 1, 2, 2);
+
+        //handle edge of screen
+        if (this.ship.x < 0 - this.ship.radius) {
+            this.ship.x = this.canvasWidth + this.ship.radius;
+        } else if (this.ship.x > this.canvasWidth + this.ship.radius) {
+            this.ship.x = 0 - this.ship.radius;
+        }
+        if (this.ship.y < 0 - this.ship.radius) {
+            this.ship.y = this.canvasHeight + this.ship.radius;
+        } else if (this.ship.y > this.canvasHeight + this.ship.radius) {
+            this.ship.y = 0 - this.ship.radius;
+        }
     }
 }
 
