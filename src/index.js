@@ -19,6 +19,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const shipThrust = 5; //acceleration of the ship in pixels per second per second
     const friction = 0.7; //friction of spaceship (0 - 1)
     var ctx = canv.getContext('2d'); 
+    
+    
 
     // canvasEl.height = window.innerHeight;
     // canvasEl.width = window.innerWidth;
@@ -43,13 +45,12 @@ document.addEventListener("DOMContentLoaded", () => {
     //         y: 0
     //     }
     // };
-    var ship = new Ship(canvasHeight, canvasWidth, ctx);
 
 
 
     //Set up event handlers
-    // document.addEventListener("keydown", keyDown);
-    // document.addEventListener("keyup", keyUp);
+    document.addEventListener("keydown", keyDown);
+    document.addEventListener("keyup", keyUp);
 
     function keyDown(event) {
         switch(event.keyCode) {
@@ -86,6 +87,10 @@ document.addEventListener("DOMContentLoaded", () => {
         // draw space 
         ctx.fillStyle = "black";
         ctx.fillRect(0, 0, canv.width, canv.height);
+
+        // draw the player ship
+        let ship = new Ship(canvasHeight, canvasWidth, ctx);
+        ship.drawShip();
         
         // thrust the ship
         if (ship.thrusting) {
@@ -99,27 +104,27 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         
         // draw the player ship
-        ctx.strokeStyle = "white",
-        ctx.lineWidth = shipSize / 15;
-        ctx.beginPath();
+        // ctx.strokeStyle = "white",
+        // ctx.lineWidth = shipSize / 15;
+        // ctx.beginPath();
 
-        ctx.moveTo( //nose of the rectangular ship
-            ship.x + 4/3 * ship.radious * Math.cos(ship.angle),
-            ship.y - 4/3 * ship.radious * Math.sin(ship.angle)
-        );
+        // ctx.moveTo( //nose of the rectangular ship
+        //     ship.x + 4/3 * ship.radious * Math.cos(ship.angle),
+        //     ship.y - 4/3 * ship.radious * Math.sin(ship.angle)
+        // );
 
-        ctx.lineTo( //rear left of the ship
-            ship.x - ship.radious * (2/3 * Math.cos(ship.angle) + Math.sin(ship.angle)),
-            ship.y + ship.radious * (2/3 * Math.sin(ship.angle) - Math.cos(ship.angle))
-        );
+        // ctx.lineTo( //rear left of the ship
+        //     ship.x - ship.radious * (2/3 * Math.cos(ship.angle) + Math.sin(ship.angle)),
+        //     ship.y + ship.radious * (2/3 * Math.sin(ship.angle) - Math.cos(ship.angle))
+        // );
 
-        ctx.lineTo( //rear right of the ship
-            ship.x - ship.radious * (2/3 * Math.cos(ship.angle) - Math.sin(ship.angle)),
-            ship.y + ship.radious * (2/3 * Math.sin(ship.angle) + Math.cos(ship.angle))
-        );
+        // ctx.lineTo( //rear right of the ship
+        //     ship.x - ship.radious * (2/3 * Math.cos(ship.angle) - Math.sin(ship.angle)),
+        //     ship.y + ship.radious * (2/3 * Math.sin(ship.angle) + Math.cos(ship.angle))
+        // );
 
-        ctx.closePath();
-        ctx.stroke(); 
+        // ctx.closePath();
+        // ctx.stroke(); 
 
 
         //rotate ship

@@ -1,14 +1,16 @@
+
 class Ship {
     constructor (canvasHeight, canvasWidth, ctx) {
         this.canvasHeight = canvasHeight;
         this.canvasWidth = canvasWidth;
+        this.shipSize = 30;
         this.ctx = ctx;
         this.x = canvasWidth / 2;
         this.y = canvasHeight / 2;
-        this.radius = 30 / 2;
-        this.angle = 90 / 180 * Math.PI, // to convert to radians 
-        this.rotation = 0,
-        this.thrusting = false,
+        this.radius = this.shipSize / 2;
+        this.angle = 90 / 180 * Math.PI; // to convert to radians 
+        this.rotation = 0;
+        this.thrusting = false;
         this.thrust = {
             x: 0,
             y: 0
@@ -21,26 +23,26 @@ class Ship {
     }
 
     drawShip() {
-        this.ctx.strokeStyle = "white";
-        this.ctx.lineWidth = 2;
         this.ctx.beginPath();
+        this.ctx.strokeStyle = "white";
+        this.ctx.lineWidth = this.shipSize / 15;
         this.ctx.moveTo( //nose of the rectangular ship
-            this.x + 4 / 3 * this.radious * Math.cos(this.angle),
-            this.y - 4 / 3 * this.radious * Math.sin(this.angle)
+            this.x + 4 / 3 * this.radius * Math.cos(this.angle),
+            this.y - 4 / 3 * this.radius * Math.sin(this.angle)
         );
 
         this.ctx.lineTo( //rear left of the ship
-            this.x - this.radious * (2 / 3 * Math.cos(this.angle) + Math.sin(this.angle)),
-            this.y + this.radious * (2 / 3 * Math.sin(this.angle) - Math.cos(this.angle))
+            this.x - this.radius * (2 / 3 * Math.cos(this.angle) + Math.sin(this.angle)),
+            this.y + this.radius * (2 / 3 * Math.sin(this.angle) - Math.cos(this.angle))
         );
 
         this.ctx.lineTo( //rear right of the ship
-            this.x - this.radious * (2 / 3 * Math.cos(this.angle) - Math.sin(this.angle)),
-            this.y + this.radious * (2 / 3 * Math.sin(this.angle) + Math.cos(this.angle))
+            this.x - this.radius * (2 / 3 * Math.cos(this.angle) - Math.sin(this.angle)),
+            this.y + this.radius * (2 / 3 * Math.sin(this.angle) + Math.cos(this.angle))
         );
 
-        ctx.closePath();
-        ctx.stroke(); 
+        this.ctx.closePath();
+        this.ctx.stroke(); 
     }
 }
 
