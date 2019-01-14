@@ -11,12 +11,13 @@ class Display {
         this.keyUp = this.keyUp.bind(this);
         this.FPS = 30;  // frames per seconds
         this.friction = 0.7; //friction of spaceship (0 - 1)
-        this.asteroidsNum = 3; // starting number of asteroids 
+        this.asteroids = new Asteroids(canvasWidth, canvasHeight, this.FPS, ctx, this.ship.shipSize, this.ship);
+
 
         document.addEventListener("keydown", this.keyDown);
         document.addEventListener("keyup", this.keyUp);
         this.renderItems();
-
+        this.asteroids.createAsteroidsBelt();
     }
 
     startGame(){
@@ -56,6 +57,11 @@ class Display {
         }
     }
 
+    
+
+
+    
+
     renderItems() {
         //create background/canvas
         this.ctx.fillStyle = "black";
@@ -63,6 +69,10 @@ class Display {
 
         //draw the player ship
         this.ship.drawShip();
+
+        //draw the asteroids 
+        this.asteroids.drawAsteroids();
+        // this.asteroids.createAsteroidsBelt();
         
         // thrust the ship
         if (this.ship.thrusting) {
