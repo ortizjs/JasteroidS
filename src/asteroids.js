@@ -14,15 +14,16 @@ class Asteroids {
         this.roids = [];
         this.roidsVertex = 10; // average number of vertices on each asteroid
         this.roidJag = 0.4; //jaggerness of the asteroids (0 = none, 1 = lots)
+        this.showBouding = true; // Shows/hide the collision boudning of each element in development mode.
         // this.createAsteroidsBelt = this.createAsteroidsBelt.bind(this);
         // this.newAsteroid = this.newAsteroid.bind(this);
     }
 
     drawAsteroids() {
         let x,y,radius, angle, vert, offs;
-        this.ctx.strokeStyle = "slategrey";
-        this.ctx.lineWidth = this.shipSize / 20;
         for (let i = 0; i < this.roids.length; i++) {
+            this.ctx.strokeStyle = "slategrey";
+            this.ctx.lineWidth = this.shipSize / 20;
             // get the asteroids properties 
             x = this.roids[i].x;
             y = this.roids[i].y;
@@ -47,6 +48,42 @@ class Asteroids {
             this.ctx.closePath();
             this.ctx.stroke();
 
+
+            //Draw collision circles
+            if (this.showBouding) {
+                this.ctx.strokeStyle = "lime";
+                this.ctx.beginPath();
+                this.ctx.arc(x, y, radius, 0, Math.PI * 2, false);
+                this.ctx.stroke();
+            }
+        
+
+            // //move the asteroid 
+
+            // this.roids[i].x += this.roids[i].xVelocity;
+            // this.roids[i].y += this.roids[i].yVelocity;
+
+            // //handle the edges of the screen
+
+            // if (this.roids[i].x < 0 - this.roids[i].radius) {
+            //     this.roids[i].x = this.canvasWidth + this.roids[i].radius;
+            // } else if (this.roids[i].x > this.canvasWidth + this.roids[i].radius) {
+            //     this.roids[i].x = 0 - this.roids[i].radius;
+            // }
+
+            // if (this.roids[i].y < 0 - this.roids[i].radius) {
+            //     this.roids[i].y = this.canvasWidth + this.roids[i].radius;
+            // } else if (this.roids[i].y > this.canvasWidth + this.roids[i].radius) {
+            //     this.roids[i].y = 0 - this.roids[i].radius;
+            // }
+        }
+
+    }
+    
+    //move the asteroids
+    moveAsteroids() {
+        let x, y, radius, angle, vert, offs;
+        for (let i = 0; i < this.roids.length; i++) {
             //move the asteroid 
 
             this.roids[i].x += this.roids[i].xVelocity;
@@ -65,16 +102,9 @@ class Asteroids {
             } else if (this.roids[i].y > this.canvasWidth + this.roids[i].radius) {
                 this.roids[i].y = 0 - this.roids[i].radius;
             }
+
         }
     }
-
-    // moveAsteroids() {
-    //     this.roids[i]
-    // }
-
-
-    
-    
 
     createAsteroidsBelt() {
         this.roids = [];
@@ -114,6 +144,8 @@ class Asteroids {
         // console.log(roid);
         return roid;
     }
+
+    
 }
 
 export default Asteroids;

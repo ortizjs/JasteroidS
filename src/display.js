@@ -12,6 +12,8 @@ class Display {
         this.FPS = 30;  // frames per seconds
         this.friction = 0.7; //friction of spaceship (0 - 1)
         this.asteroids = new Asteroids(canvasWidth, canvasHeight, this.FPS, ctx, this.ship.shipSize, this.ship);
+        this.showBouding = true;
+
 
 
         document.addEventListener("keydown", this.keyDown);
@@ -25,6 +27,7 @@ class Display {
             this.frame = requestAnimationFrame(begin);
             this.renderItems();
             // this.asteroids.createAsteroidsBelt();
+            this.asteroids.moveAsteroids();
         };
         begin();
     }
@@ -66,6 +69,13 @@ class Display {
 
         //draw the player ship
         this.ship.drawShip();
+
+        //Collision boudning
+        if (this.showBouding) {
+            this.ship.drawBouding();
+
+        }
+
 
         //draw the asteroids 
         this.asteroids.drawAsteroids();

@@ -14,5 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let canvasHeight = canv.height; 
     let ctx = canv.getContext('2d'); 
     let game = new Display(canvasWidth, canvasHeight, ctx);
-    game.startGame();
+    document.querySelector("button").addEventListener("click", () => {
+        game.startGame();
+    }) ;
 });

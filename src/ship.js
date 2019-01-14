@@ -22,10 +22,10 @@ class Ship {
         };
     }
 
-    thurst(){
-        this.x = 0;
-        this.y = 0;
-    }
+    // thurst(){
+    //     this.x = 0;
+    //     this.y = 0;
+    // }
 
     drawShip() {
         this.ctx.beginPath();
@@ -48,6 +48,13 @@ class Ship {
         );
 
         this.ctx.closePath();
+        this.ctx.stroke();
+    } 
+
+    drawBouding() {
+        this.ctx.strokeStyle = "lime";
+        this.ctx.beginPath();
+        this.ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
         this.ctx.stroke();
     }
 
