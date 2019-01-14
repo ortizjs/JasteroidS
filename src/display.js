@@ -19,11 +19,12 @@ class Display {
         this.renderItems();
         this.asteroids.createAsteroidsBelt();
     }
-
+    
     startGame(){
         const begin = () => {
             this.frame = requestAnimationFrame(begin);
             this.renderItems();
+            // this.asteroids.createAsteroidsBelt();
         };
         begin();
     }
@@ -94,6 +95,7 @@ class Display {
 
         // centre dot 
         this.ctx.fillStyle = "red";
+        // console.log("this.ship.x @ display", this.ship.x);
         this.ctx.fillRect(this.ship.x - 1, this.ship.y - 1, 2, 2);
 
         //handle edge of screen

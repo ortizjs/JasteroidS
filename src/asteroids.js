@@ -10,16 +10,16 @@ class Asteroids {
         this.ship = ship;
         this.x;
         this.y;
-        this.roidsNum = 3; // starting number of asteroids 
-        // this.asteroidSize.ctx = ctx;
+        this.roidsNum = 10; // starting number of asteroids 
         this.roids = [];
         this.roidsVertex = 10; // average number of vertices on each asteroid
+        this.roidJag = 0.4; //jaggerness of the asteroids (0 = none, 1 = lots)
         // this.createAsteroidsBelt = this.createAsteroidsBelt.bind(this);
         // this.newAsteroid = this.newAsteroid.bind(this);
     }
 
     drawAsteroids() {
-        let x,y,radius, angle, vert;
+        let x,y,radius, angle, vert, offs;
         this.ctx.strokeStyle = "slategrey";
         this.ctx.lineWidth = this.shipSize / 20;
         for (let i = 0; i < this.roids.length; i++) {
@@ -29,18 +29,19 @@ class Asteroids {
             radius = this.roids[i].radius;
             angle = this.roids[i].angle;
             vert = this.roids[i].vert;
+            offs = this.roids[i].offs; 
 
             //draw a path
             this.ctx.beginPath();
             this.ctx.moveTo(
-                x + radius * Math.cos(angle),
-                y + radius * Math.sin(angle)
+                x + radius * offs[0] * Math.cos(angle),
+                y + radius * offs[0] * Math.sin(angle)
             );
             // draw the polygon 
-            for (let j = 0; j < vert; j++) {
+            for (let j = 1 ; j < vert; j++) {
                 this.ctx.lineTo(
-                    x + radius * Math.cos(angle + j * Math.PI * 2 / vert),
-                    y + radius * Math.sin(angle + j * Math.PI * 2 / vert)
+                    x + radius * offs[j] * Math.cos(angle + j * Math.PI * 2 / vert),
+                    y + radius * offs[j] * Math.sin(angle + j * Math.PI * 2 / vert)
                 );
             }
             this.ctx.closePath();
@@ -56,10 +57,14 @@ class Asteroids {
             do {
                 this.x = Math.floor(Math.random() * this.canvasWidth);
                 this.y = Math.floor(Math.random() * this.canvasHeight);
-                this.roids.push(this.newAsteroid(this.x, this.y));
             } while (this.distBeteenPoints(this.ship.x, this.ship.y, this.x, this.y) < this.roidSize * 2 + this.ship.radius);
+                this.roids.push(this.newAsteroid(this.x, this.y));
         }
-        console.log(this.roids);
+        // console.log(
+        //     "this.ship.x: ", this.ship.x);
+        // console.log(
+        //     "this.ship.y: ", this.ship.y);
+        // console.log(this.roids);
     }
 
     distBeteenPoints(x1, y1, x2, y2) {
@@ -74,8 +79,13 @@ class Asteroids {
             yVelocity: Math.random() * this.roidSpeed / this.FPS * (Math.random() < 0.5 ? 1 : -1),
             radius: this.roidSize / 2,
             angle: Math.random() * Math.PI * 2, // in radians
-            vert: Math.floor(Math.random() * (this.roidsVertex + 1) + this.roidsVertex / 2)
+            vert: Math.floor(Math.random() * (this.roidsVertex + 1) + this.roidsVertex / 2),
+            offs: []
         };
+        //create vertex offset array 
+        for (let i = 0; i < roid.vert; i++) {
+            roid.offs.push(Math.random() * this.roidJag * 2 + 1 - this.roidJag);
+        }
         // console.log(roid);
         return roid;
     }
