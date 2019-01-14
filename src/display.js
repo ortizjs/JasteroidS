@@ -8,7 +8,8 @@ class Display {
         this.keyDown = this.keyDown.bind(this);
         this.keyUp = this.keyUp.bind(this);
         this.FPS = 30;  // frames per seconds
-        this.friction = 0.7; //friction of spaceship (0 - 1) 
+        this.friction = 0.7; //friction of spaceship (0 - 1)
+        this.asteroidsNum = 3; // starting number of asteroids 
 
         document.addEventListener("keydown", this.keyDown);
         document.addEventListener("keyup", this.keyUp);
@@ -65,7 +66,7 @@ class Display {
         if (this.ship.thrusting) {
             this.ship.thrust.x += this.ship.shipThrust * Math.cos(this.ship.angle) / this.FPS;
             this.ship.thrust.y -= this.ship.shipThrust * Math.sin(this.ship.angle) / this.FPS;
-
+            this.ship.drawThrust();
 
         } else {
             this.ship.thrust.x -= this.friction * this.ship.thrust.x / this.FPS;

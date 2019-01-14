@@ -29,8 +29,9 @@ class Ship {
 
     drawShip() {
         this.ctx.beginPath();
+         
         this.ctx.strokeStyle = "white";
-        this.ctx.lineWidth = this.shipSize / 15;
+        this.ctx.lineWidth = this.shipSize / 20;
         this.ctx.moveTo( //nose of the rectangular ship
             this.x + 4 / 3 * this.radius * Math.cos(this.angle),
             this.y - 4 / 3 * this.radius * Math.sin(this.angle)
@@ -47,7 +48,34 @@ class Ship {
         );
 
         this.ctx.closePath();
-        this.ctx.stroke(); 
+        this.ctx.stroke();
+    }
+
+    drawThrust() {
+        //Draw the thruster
+
+        this.ctx.beginPath();
+        this.ctx.fillStyle = "red";
+        this.ctx.strokeStyle = "yellow";
+        this.ctx.lineWidth = this.shipSize / 10;
+        this.ctx.moveTo( //rear left
+            this.x - this.radius * (2 / 3 * Math.cos(this.angle) + 0.5 * Math.sin(this.angle)),
+            this.y + this.radius * (2 / 3 * Math.sin(this.angle) - 0.5 * Math.cos(this.angle))
+        );
+
+        this.ctx.lineTo( //rear center (behind the ship)
+            this.x - this.radius * 6 / 3 * Math.cos(this.angle),
+            this.y + this.radius * 6 / 3 * Math.sin(this.angle)
+        );
+
+        this.ctx.lineTo( //rear right 
+            this.x - this.radius * (2 / 3 * Math.cos(this.angle) - 0.5 * Math.sin(this.angle)),
+            this.y + this.radius * (2 / 3 * Math.sin(this.angle) + 0.5 * Math.cos(this.angle))
+        );
+
+        this.ctx.closePath();
+        this.ctx.fill();
+        this.ctx.stroke();
     }
 }
 
