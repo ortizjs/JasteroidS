@@ -59,10 +59,6 @@ class Display {
     }
 
     
-
-
-    
-
     renderItems() {
         //create background/canvas
         this.ctx.fillStyle = "black";
@@ -74,6 +70,10 @@ class Display {
         //draw the asteroids 
         this.asteroids.drawAsteroids();
         // this.asteroids.createAsteroidsBelt();
+        
+
+        //Move the asteroids....
+        
         
         // thrust the ship
         if (this.ship.thrusting) {
