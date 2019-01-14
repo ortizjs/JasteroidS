@@ -1,4 +1,6 @@
 import Ship from "./ship";
+import Asteroids from "./asteroids";
+
 class Display {
     constructor(canvasWidth, canvasHeight, ctx){
         this.canvasWidth = canvasWidth;
