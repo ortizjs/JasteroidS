@@ -6,6 +6,7 @@
 
 import Display from "./display";
 import Ship from "./ship";
+import { Howl } from "howler";
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -13,8 +14,24 @@ document.addEventListener("DOMContentLoaded", () => {
     let canvasWidth = canv.width; 
     let canvasHeight = canv.height; 
     let ctx = canv.getContext('2d'); 
-    let game = new Display(canvasWidth, canvasHeight, ctx);
+    var gameSound = new Howl({
+        src: ["/src/background_sound.mp3"],
+        buffer: true,
+        loop: true
+    });
+    // var spaceShipSound = new Howl({
+    //     src: ["/src/spaceshipsound.mp3"],
+    //     // buffer: true,
+    //     // loop: true
+    // });
+
+    let game = new Display(canvasWidth, canvasHeight, ctx /*spaceShipSound*/);
     document.querySelector("button").addEventListener("click", () => {
         game.startGame();
+        gameSound.play();
+        // spaceShipSound.play();
     }) ;
 });
+
+/// python -m SimpleHTTPServer   <------- run server for audio
+/// localhost: 8000

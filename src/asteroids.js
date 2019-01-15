@@ -81,30 +81,30 @@ class Asteroids {
     }
     
     //move the asteroids
-    moveAsteroids() {
-        let x, y, radius, angle, vert, offs;
-        for (let i = 0; i < this.roids.length; i++) {
-            //move the asteroid 
+    // moveAsteroids() {
+    //     let x, y, radius, angle, vert, offs;
+    //     for (let i = 0; i < this.roids.length; i++) {
+    //         //move the asteroid 
 
-            this.roids[i].x += this.roids[i].xVelocity;
-            this.roids[i].y += this.roids[i].yVelocity;
+    //         this.roids[i].x += this.roids[i].xVelocity;
+    //         this.roids[i].y += this.roids[i].yVelocity;
 
-            //handle the edges of the screen
+    //         //handle the edges of the screen
 
-            if (this.roids[i].x < 0 - this.roids[i].radius) {
-                this.roids[i].x = this.canvasWidth + this.roids[i].radius;
-            } else if (this.roids[i].x > this.canvasWidth + this.roids[i].radius) {
-                this.roids[i].x = 0 - this.roids[i].radius;
-            }
+    //         if (this.roids[i].x < 0 - this.roids[i].radius) {
+    //             this.roids[i].x = this.canvasWidth + this.roids[i].radius;
+    //         } else if (this.roids[i].x > this.canvasWidth + this.roids[i].radius) {
+    //             this.roids[i].x = 0 - this.roids[i].radius;
+    //         }
 
-            if (this.roids[i].y < 0 - this.roids[i].radius) {
-                this.roids[i].y = this.canvasWidth + this.roids[i].radius;
-            } else if (this.roids[i].y > this.canvasWidth + this.roids[i].radius) {
-                this.roids[i].y = 0 - this.roids[i].radius;
-            }
+    //         if (this.roids[i].y < 0 - this.roids[i].radius) {
+    //             this.roids[i].y = this.canvasWidth + this.roids[i].radius;
+    //         } else if (this.roids[i].y > this.canvasWidth + this.roids[i].radius) {
+    //             this.roids[i].y = 0 - this.roids[i].radius;
+    //         }
 
-        }
-    }
+    //     }
+    // }
 
     createAsteroidsBelt() {
         this.roids = [];

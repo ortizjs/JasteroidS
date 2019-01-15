@@ -1,11 +1,13 @@
 import Ship from "./ship";
 import Asteroids from "./asteroids";
+// import { Howl } from "howler";
 
 class Display {
-    constructor(canvasWidth, canvasHeight, ctx){
+    constructor(canvasWidth, canvasHeight, ctx /*spaceShipSound*/){
         this.canvasWidth = canvasWidth;
         this.canvasHeight = canvasHeight;
         this.ctx = ctx;
+        // this.spaceShipSound = spaceShipSound;
         this.ship = new Ship(canvasWidth, canvasHeight, ctx);
         this.keyDown = this.keyDown.bind(this);
         this.keyUp = this.keyUp.bind(this);
@@ -27,7 +29,7 @@ class Display {
             this.frame = requestAnimationFrame(begin);
             this.renderItems();
             // this.asteroids.createAsteroidsBelt();
-            this.asteroids.moveAsteroids();
+            // this.asteroids.moveAsteroids();
         };
         begin();
     }
@@ -67,26 +69,18 @@ class Display {
         this.ctx.fillStyle = "black";
         this.ctx.fillRect(0, 0, this.canvasWidth, this.canvasHeight);
 
-        //draw the player ship
-        this.ship.drawShip();
-
-        //Collision boudning
+        //Collision bounding
         if (this.showBouding) {
             this.ship.drawBouding();
 
         }
 
+        //draw the player ship
+        this.ship.drawShip();
 
-        //draw the asteroids 
-        this.asteroids.drawAsteroids();
-        // this.asteroids.createAsteroidsBelt();
-        
-
-        //Move the asteroids....
-        
-        
         // thrust the ship
         if (this.ship.thrusting) {
+            this.spaceShipSound.play();
             this.ship.thrust.x += this.ship.shipThrust * Math.cos(this.ship.angle) / this.FPS;
             this.ship.thrust.y -= this.ship.shipThrust * Math.sin(this.ship.angle) / this.FPS;
             this.ship.drawThrust();
@@ -118,6 +112,44 @@ class Display {
             this.ship.y = this.canvasHeight + this.ship.radius;
         } else if (this.ship.y > this.canvasHeight + this.ship.radius) {
             this.ship.y = 0 - this.ship.radius;
+        }
+
+
+
+        //draw the asteroids 
+        this.asteroids.drawAsteroids();
+        // this.asteroids.createAsteroidsBelt();
+        
+
+        //Move the asteroids....
+        for (let i = 0; i < this.asteroids.roids.length; i++) {
+
+            this.asteroids.roids[i].x += this.asteroids.roids[i].xVelocity;
+            this.asteroids.roids[i].y += this.asteroids.roids[i].yVelocity;
+        }
+
+        //handle the edges of the screen
+        for (let i = 0; i < this.asteroids.roids.length; i++) {
+            if (this.asteroids.roids[i].x < 0 - this.asteroids.roids[i].radius) {
+                this.asteroids.roids[i].x = this.canvasWidth + this.asteroids.roids[i].radius;
+            } else if (this.asteroids.roids[i].x > this.canvasWidth + this.asteroids.roids[i].radius) {
+                this.asteroids.roids[i].x = 0 - this.asteroids.roids[i].radius;
+            }
+
+            if (this.asteroids.roids[i].y < 0 - this.asteroids.roids[i].radius) {
+                this.asteroids.roids[i].y = this.canvasWidth + this.asteroids.roids[i].radius;
+            } else if (this.asteroids.roids[i].y > this.canvasWidth + this.asteroids.roids[i].radius) {
+                this.asteroids.roids[i].y = 0 - this.asteroids.roids[i].radius;
+            }
+        }
+
+        //check asteroid collision
+
+        for (let i = 0; i < this.asteroids.roids.length; i++) {
+            if (this.asteroids.distBeteenPoints(this.ship.x, this.ship.y, this.asteroids.roids[i].x, 
+                this.asteroids.roids[i].y) < this.ship.radius + this.asteroids.roids[i].radius) {
+                    this.ship.explodeShip();
+                }
         }
     }
 }

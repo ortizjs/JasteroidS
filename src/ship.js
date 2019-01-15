@@ -84,6 +84,9 @@ class Ship {
         this.ctx.fill();
         this.ctx.stroke();
     }
+
+    // explodeShip() {
+    // }
 }
 
 export default Ship;
