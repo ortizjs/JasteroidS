@@ -3,18 +3,23 @@ import Asteroids from "./asteroids";
 // import { Howl } from "howler";
 
 class Display {
-    constructor(canvasWidth, canvasHeight, ctx /*spaceShipSound*/){
+    constructor(canvasWidth, canvasHeight, ctx, spaceShipSound){
         this.canvasWidth = canvasWidth;
         this.canvasHeight = canvasHeight;
         this.ctx = ctx;
-        // this.spaceShipSound = spaceShipSound;
+        this.spaceShipSound = spaceShipSound;
         this.ship = new Ship(canvasWidth, canvasHeight, ctx);
         this.keyDown = this.keyDown.bind(this);
         this.keyUp = this.keyUp.bind(this);
         this.FPS = 30;  // frames per seconds
         this.friction = 0.7; //friction of spaceship (0 - 1)
         this.asteroids = new Asteroids(canvasWidth, canvasHeight, this.FPS, ctx, this.ship.shipSize, this.ship);
-        this.showBouding = true;
+        this.showBouding = false;
+        this.shipExplodeTime = 0;
+        this.shipExplodeDuration = 0.3; 
+        this.background = new Image();
+        this.background.src ="./imgs/backgroundimg.png";
+        // 
 
 
 
@@ -63,11 +68,23 @@ class Display {
         }
     }
 
-    
+    // exploding() {
+    //     return this.ship.explodeTime > 0;
+    // }
+
+    explodeShip() {
+    //     this.shipExplodeTime = Math.ceil(this.shipExplodeDuration * this.FPS);
+    //     this.exploting = this.shipExplodeTime > 0;
+        // console.log(this.exploting, this.shipExplodeTime);
+        alert('Game over!');
+        document.location.reload();
+    }
+
     renderItems() {
         //create background/canvas
-        this.ctx.fillStyle = "black";
-        this.ctx.fillRect(0, 0, this.canvasWidth, this.canvasHeight);
+        // this.ctx.fillStyle = "black";
+        // this.ctx.fillRect(0, 0, this.canvasWidth, this.canvasHeight);
+        this.ctx.drawImage(this.background, 0, 0);
 
         //Collision bounding
         if (this.showBouding) {
@@ -75,8 +92,16 @@ class Display {
 
         }
 
-        //draw the player ship
-        this.ship.drawShip();
+        //draw the player ship or explotion
+        // this.ship.drawShip();
+
+        if (!this.exploting) {
+            this.ship.drawShip();
+        } else {
+            //draw the explotion
+            this.ship.drawExplotion();
+        }
+
 
         // thrust the ship
         if (this.ship.thrusting) {
@@ -117,9 +142,7 @@ class Display {
 
 
         //draw the asteroids 
-        this.asteroids.drawAsteroids();
-        // this.asteroids.createAsteroidsBelt();
-        
+        this.asteroids.drawAsteroids();        
 
         //Move the asteroids....
         for (let i = 0; i < this.asteroids.roids.length; i++) {
@@ -144,12 +167,14 @@ class Display {
         }
 
         //check asteroid collision
-
         for (let i = 0; i < this.asteroids.roids.length; i++) {
             if (this.asteroids.distBeteenPoints(this.ship.x, this.ship.y, this.asteroids.roids[i].x, 
                 this.asteroids.roids[i].y) < this.ship.radius + this.asteroids.roids[i].radius) {
-                    this.ship.explodeShip();
-                }
+                    this.explodeShip();
+
+                    // alert('Game over!');
+                    // document.location.reload();
+            }
         }
     }
 }

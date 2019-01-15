@@ -15,22 +15,23 @@ document.addEventListener("DOMContentLoaded", () => {
     let canvasHeight = canv.height; 
     let ctx = canv.getContext('2d'); 
     var gameSound = new Howl({
-        src: ["/src/background_sound.mp3"],
+        src: ["/src/background.mp3"],
         buffer: true,
         loop: true
     });
-    // var spaceShipSound = new Howl({
-    //     src: ["/src/spaceshipsound.mp3"],
-    //     // buffer: true,
-    //     // loop: true
-    // });
 
-    let game = new Display(canvasWidth, canvasHeight, ctx /*spaceShipSound*/);
+    var spaceShipSound = new Howl({
+        src: ["/src/spaceship_sound.mp3"],
+        // buffer: true,
+        // loop: true
+    });
+
+    let game = new Display(canvasWidth, canvasHeight, ctx, spaceShipSound);
     document.querySelector("button").addEventListener("click", () => {
         game.startGame();
         gameSound.play();
         // spaceShipSound.play();
-    }) ;
+    });
 });
 
 /// python -m SimpleHTTPServer   <------- run server for audio

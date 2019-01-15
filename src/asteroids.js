@@ -14,7 +14,7 @@ class Asteroids {
         this.roids = [];
         this.roidsVertex = 10; // average number of vertices on each asteroid
         this.roidJag = 0.4; //jaggerness of the asteroids (0 = none, 1 = lots)
-        this.showBouding = true; // Shows/hide the collision boudning of each element in development mode.
+        this.showBouding = false; // Shows/hide the collision boudning of each element in development mode.
         // this.createAsteroidsBelt = this.createAsteroidsBelt.bind(this);
         // this.newAsteroid = this.newAsteroid.bind(this);
     }
@@ -56,26 +56,6 @@ class Asteroids {
                 this.ctx.arc(x, y, radius, 0, Math.PI * 2, false);
                 this.ctx.stroke();
             }
-        
-
-            // //move the asteroid 
-
-            // this.roids[i].x += this.roids[i].xVelocity;
-            // this.roids[i].y += this.roids[i].yVelocity;
-
-            // //handle the edges of the screen
-
-            // if (this.roids[i].x < 0 - this.roids[i].radius) {
-            //     this.roids[i].x = this.canvasWidth + this.roids[i].radius;
-            // } else if (this.roids[i].x > this.canvasWidth + this.roids[i].radius) {
-            //     this.roids[i].x = 0 - this.roids[i].radius;
-            // }
-
-            // if (this.roids[i].y < 0 - this.roids[i].radius) {
-            //     this.roids[i].y = this.canvasWidth + this.roids[i].radius;
-            // } else if (this.roids[i].y > this.canvasWidth + this.roids[i].radius) {
-            //     this.roids[i].y = 0 - this.roids[i].radius;
-            // }
         }
 
     }
@@ -115,11 +95,6 @@ class Asteroids {
             } while (this.distBeteenPoints(this.ship.x, this.ship.y, this.x, this.y) < this.roidSize * 2 + this.ship.radius);
                 this.roids.push(this.newAsteroid(this.x, this.y));
         }
-        // console.log(
-        //     "this.ship.x: ", this.ship.x);
-        // console.log(
-        //     "this.ship.y: ", this.ship.y);
-        // console.log(this.roids);
     }
 
     distBeteenPoints(x1, y1, x2, y2) {

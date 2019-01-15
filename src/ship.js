@@ -14,7 +14,9 @@ class Ship {
         this.shipThrust = 5; //acceleration of the ship in pixels per second per second
         this.turnSpeed = 150; //Turn speed in degrees per second (check 360 if need to)
         this.thrustX = 0;        
-        this.thrustY = 0;        
+        this.thrustY = 0;    
+        // this.explodeTime = 0; 
+        // this.shipExplodeDuration = 0.3; //Duration of the ship explosion
 
         this.thrust = {
             x: 0,
@@ -22,14 +24,8 @@ class Ship {
         };
     }
 
-    // thurst(){
-    //     this.x = 0;
-    //     this.y = 0;
-    // }
-
     drawShip() {
         this.ctx.beginPath();
-         
         this.ctx.strokeStyle = "white";
         this.ctx.lineWidth = this.shipSize / 20;
         this.ctx.moveTo( //nose of the rectangular ship
@@ -55,6 +51,29 @@ class Ship {
         this.ctx.strokeStyle = "lime";
         this.ctx.beginPath();
         this.ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+        this.ctx.stroke();
+    }
+
+    drawExplotion() {
+        this.ctx.strokeStyle = "darkred";
+        this.ctx.beginPath();
+        this.ctx.arc(this.x, this.y, this.radius * 1.7, 0, Math.PI * 2, false);
+        this.ctx.stroke();
+        this.ctx.strokeStyle = "red";
+        this.ctx.beginPath();
+        this.ctx.arc(this.x, this.y, this.radius * 1.4, 0, Math.PI * 2, false);
+        this.ctx.stroke();
+        this.ctx.strokeStyle = "orange";
+        this.ctx.beginPath();
+        this.ctx.arc(this.x, this.y, this.radius * 1.1, 0, Math.PI * 2, false);
+        this.ctx.stroke();
+        this.ctx.strokeStyle = "yello";
+        this.ctx.beginPath();
+        this.ctx.arc(this.x, this.y, this.radius * 0.8, 0, Math.PI * 2, false);
+        this.ctx.stroke();
+        this.ctx.strokeStyle = "white";
+        this.ctx.beginPath();
+        this.ctx.arc(this.x, this.y, this.radius * 0.5, 0, Math.PI * 2, false);
         this.ctx.stroke();
     }
 
@@ -86,47 +105,16 @@ class Ship {
     }
 
     // explodeShip() {
+    //     this.explodeTime = Math.ceil(this.shipExplodeDuration * this.FPS);
+    //     console.log(this.explodeTime);
+    //     // this.drawExplotion();
+    //     // this.ctx.fillStyle = "lime";
+    //     // this.ctx.strokeStyle = "lime";
+    //     // this.ctx.beginPath();
+    //     // this.ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+    //     // this.ctx.fill();
+    //     // this.ctx.stroke();
     // }
 }
 
 export default Ship;
-
-
-
-// draw the player ship
-// ctx.strokeStyle = "white",
-//     ctx.lineWidth = shipSize / 15;
-// ctx.beginPath();
-
-// ctx.moveTo( //nose of the rectangular ship
-//     ship.x + 4 / 3 * ship.radious * Math.cos(ship.angle),
-//     ship.y - 4 / 3 * ship.radious * Math.sin(ship.angle)
-// );
-
-// ctx.lineTo( //rear left of the ship
-//     ship.x - ship.radious * (2 / 3 * Math.cos(ship.angle) + Math.sin(ship.angle)),
-//     ship.y + ship.radious * (2 / 3 * Math.sin(ship.angle) - Math.cos(ship.angle))
-// );
-
-// ctx.lineTo( //rear right of the ship
-//     ship.x - ship.radious * (2 / 3 * Math.cos(ship.angle) - Math.sin(ship.angle)),
-//     ship.y + ship.radious * (2 / 3 * Math.sin(ship.angle) + Math.cos(ship.angle))
-// );
-
-// ctx.closePath();
-// ctx.stroke(); 
-
-
-
-// var ship = {
-//     x: canv.width / 2,
-//     y: canv.height / 2,
-//     radious: shipSize / 2,
-//     angle: 90 / 180 * Math.PI, // to convert to radians 
-//     rotation: 0,
-//     thrusting: false,
-//     thrust: {
-//         x: 0,
-//         y: 0
-//     }
-// };
