@@ -40,4 +40,4 @@
     * Day 7: Finish audio and final touches.
 
     ## Wireframe: 
-    ![](./imgs/wireframe.jpeg)
+    ![](./imgs/wireframefinal.png)
