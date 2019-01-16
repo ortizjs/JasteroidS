@@ -3435,6 +3435,8 @@ class Display {
         this.shipExplodeDuration = 0.3; 
         this.background = new Image();
         this.background.src ="./imgs/backgroundimg.png";
+        this.exploting = false;
+        this.exploat = 0;
         // 
 
 
@@ -3489,11 +3491,24 @@ class Display {
     // }
 
     explodeShip() {
-    //     this.shipExplodeTime = Math.ceil(this.shipExplodeDuration * this.FPS);
+        this.shipExplodeTime = Math.ceil(this.shipExplodeDuration * this.FPS);
     //     this.exploting = this.shipExplodeTime > 0;
-        // console.log(this.exploting, this.shipExplodeTime);
-        alert('Game over!');
+    // console.log(this.exploting, this.shipExplodeTime);
+    
+        this.ship.drawExplotion();
+        console.log(this.exploat = 65);
+        console.log("Exploded");
+        if (this.exploat === 65) {
+            console.log(this.ship.x, this.ship.y);
+            // setTimeout(this.alertAndReload(), 200);
+        }
+        
+        
+    }
+    
+    alertAndReload() {
         document.location.reload();
+        alert('Game over!');
     }
 
     renderItems() {
@@ -3516,6 +3531,7 @@ class Display {
         } else {
             //draw the explotion
             this.ship.drawExplotion();
+            setTimeout(this.alertAndReload(), 2000);
         }
 
 
@@ -3524,7 +3540,9 @@ class Display {
             this.spaceShipSound.play();
             this.ship.thrust.x += this.ship.shipThrust * Math.cos(this.ship.angle) / this.FPS;
             this.ship.thrust.y -= this.ship.shipThrust * Math.sin(this.ship.angle) / this.FPS;
-            this.ship.drawThrust();
+            if (!this.exploting){
+                this.ship.drawThrust();
+            }
 
         } else {
             this.ship.thrust.x -= this.friction * this.ship.thrust.x / this.FPS;
@@ -3535,8 +3553,10 @@ class Display {
         this.ship.angle += this.ship.rotation;
 
         //move the ship
-        this.ship.x += this.ship.thrust.x;
-        this.ship.y += this.ship.thrust.y;
+        if (!this.exploting) {
+            this.ship.x += this.ship.thrust.x;
+            this.ship.y += this.ship.thrust.y;
+        }
 
         // centre dot 
         this.ctx.fillStyle = "red";
@@ -3561,10 +3581,12 @@ class Display {
         this.asteroids.drawAsteroids();        
 
         //Move the asteroids....
-        for (let i = 0; i < this.asteroids.roids.length; i++) {
+        if (!this.exploting) {
+            for (let i = 0; i < this.asteroids.roids.length; i++) {
 
-            this.asteroids.roids[i].x += this.asteroids.roids[i].xVelocity;
-            this.asteroids.roids[i].y += this.asteroids.roids[i].yVelocity;
+                this.asteroids.roids[i].x += this.asteroids.roids[i].xVelocity;
+                this.asteroids.roids[i].y += this.asteroids.roids[i].yVelocity;
+            }
         }
 
         //handle the edges of the screen
@@ -3586,7 +3608,14 @@ class Display {
         for (let i = 0; i < this.asteroids.roids.length; i++) {
             if (this.asteroids.distBeteenPoints(this.ship.x, this.ship.y, this.asteroids.roids[i].x, 
                 this.asteroids.roids[i].y) < this.ship.radius + this.asteroids.roids[i].radius) {
+                // console.log(this.asteroids.distBeteenPoints(this.ship.x, this.ship.y, this.asteroids.roids[i].x,
+                //     this.asteroids.roids[i].y));
+                // console.log(this.ship.radius + this.asteroids.roids[i].radius);
+                    
+                    this.exploting = true;
+                    this.exploat = 65;
                     this.explodeShip();
+
 
                     // alert('Game over!');
                     // document.location.reload();
@@ -3609,9 +3638,8 @@ class Display {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _display__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./display */ "./src/display.js");
-/* harmony import */ var _ship__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ship */ "./src/ship.js");
-/* harmony import */ var howler__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! howler */ "./node_modules/howler/dist/howler.js");
-/* harmony import */ var howler__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(howler__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var howler__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! howler */ "./node_modules/howler/dist/howler.js");
+/* harmony import */ var howler__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(howler__WEBPACK_IMPORTED_MODULE_1__);
 // import _ from 'lodash';
 
 // const Game = require("./game");
@@ -3622,19 +3650,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 document.addEventListener("DOMContentLoaded", () => {
     var canv = document.getElementById('game-canvas');
     let canvasWidth = canv.width; 
     let canvasHeight = canv.height; 
     let ctx = canv.getContext('2d'); 
-    var gameSound = new howler__WEBPACK_IMPORTED_MODULE_2__["Howl"]({
+    var gameSound = new howler__WEBPACK_IMPORTED_MODULE_1__["Howl"]({
         src: ["/src/background.mp3"],
         buffer: true,
         loop: true
     });
 
-    var spaceShipSound = new howler__WEBPACK_IMPORTED_MODULE_2__["Howl"]({
+    var spaceShipSound = new howler__WEBPACK_IMPORTED_MODULE_1__["Howl"]({
         src: ["/src/spaceship_sound.mp3"],
         // buffer: true,
         // loop: true
@@ -3719,26 +3746,26 @@ class Ship {
     }
 
     drawExplotion() {
-        this.ctx.strokeStyle = "darkred";
+        this.ctx.fillStyle = "darkred";
         this.ctx.beginPath();
         this.ctx.arc(this.x, this.y, this.radius * 1.7, 0, Math.PI * 2, false);
-        this.ctx.stroke();
-        this.ctx.strokeStyle = "red";
+        this.ctx.fill();
+        this.ctx.fillStyle = "red";
         this.ctx.beginPath();
         this.ctx.arc(this.x, this.y, this.radius * 1.4, 0, Math.PI * 2, false);
-        this.ctx.stroke();
-        this.ctx.strokeStyle = "orange";
+        this.ctx.fill();
+        this.ctx.fillStyle = "orange";
         this.ctx.beginPath();
         this.ctx.arc(this.x, this.y, this.radius * 1.1, 0, Math.PI * 2, false);
-        this.ctx.stroke();
-        this.ctx.strokeStyle = "yello";
+        this.ctx.fill();
+        this.ctx.fillStyle = "yello";
         this.ctx.beginPath();
         this.ctx.arc(this.x, this.y, this.radius * 0.8, 0, Math.PI * 2, false);
-        this.ctx.stroke();
-        this.ctx.strokeStyle = "white";
+        this.ctx.fill();
+        this.ctx.fillStyle = "white";
         this.ctx.beginPath();
         this.ctx.arc(this.x, this.y, this.radius * 0.5, 0, Math.PI * 2, false);
-        this.ctx.stroke();
+        this.ctx.fill();
     }
 
     drawThrust() {

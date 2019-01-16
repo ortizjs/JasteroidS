@@ -19,6 +19,8 @@ class Display {
         this.shipExplodeDuration = 0.3; 
         this.background = new Image();
         this.background.src ="./imgs/backgroundimg.png";
+        this.exploting = false;
+        this.exploat = 0;
         // 
 
 
@@ -73,11 +75,24 @@ class Display {
     // }
 
     explodeShip() {
-    //     this.shipExplodeTime = Math.ceil(this.shipExplodeDuration * this.FPS);
+        this.shipExplodeTime = Math.ceil(this.shipExplodeDuration * this.FPS);
     //     this.exploting = this.shipExplodeTime > 0;
-        // console.log(this.exploting, this.shipExplodeTime);
-        alert('Game over!');
+    // console.log(this.exploting, this.shipExplodeTime);
+    
+        this.ship.drawExplotion();
+        console.log(this.exploat = 65);
+        console.log("Exploded");
+        if (this.exploat === 65) {
+            console.log(this.ship.x, this.ship.y);
+            // setTimeout(this.alertAndReload(), 200);
+        }
+        
+        
+    }
+    
+    alertAndReload() {
         document.location.reload();
+        alert('Game over!');
     }
 
     renderItems() {
@@ -100,6 +115,7 @@ class Display {
         } else {
             //draw the explotion
             this.ship.drawExplotion();
+            setTimeout(this.alertAndReload(), 2000);
         }
 
 
@@ -108,7 +124,9 @@ class Display {
             this.spaceShipSound.play();
             this.ship.thrust.x += this.ship.shipThrust * Math.cos(this.ship.angle) / this.FPS;
             this.ship.thrust.y -= this.ship.shipThrust * Math.sin(this.ship.angle) / this.FPS;
-            this.ship.drawThrust();
+            if (!this.exploting){
+                this.ship.drawThrust();
+            }
 
         } else {
             this.ship.thrust.x -= this.friction * this.ship.thrust.x / this.FPS;
@@ -119,8 +137,10 @@ class Display {
         this.ship.angle += this.ship.rotation;
 
         //move the ship
-        this.ship.x += this.ship.thrust.x;
-        this.ship.y += this.ship.thrust.y;
+        if (!this.exploting) {
+            this.ship.x += this.ship.thrust.x;
+            this.ship.y += this.ship.thrust.y;
+        }
 
         // centre dot 
         this.ctx.fillStyle = "red";
@@ -145,10 +165,12 @@ class Display {
         this.asteroids.drawAsteroids();        
 
         //Move the asteroids....
-        for (let i = 0; i < this.asteroids.roids.length; i++) {
+        if (!this.exploting) {
+            for (let i = 0; i < this.asteroids.roids.length; i++) {
 
-            this.asteroids.roids[i].x += this.asteroids.roids[i].xVelocity;
-            this.asteroids.roids[i].y += this.asteroids.roids[i].yVelocity;
+                this.asteroids.roids[i].x += this.asteroids.roids[i].xVelocity;
+                this.asteroids.roids[i].y += this.asteroids.roids[i].yVelocity;
+            }
         }
 
         //handle the edges of the screen
@@ -170,7 +192,14 @@ class Display {
         for (let i = 0; i < this.asteroids.roids.length; i++) {
             if (this.asteroids.distBeteenPoints(this.ship.x, this.ship.y, this.asteroids.roids[i].x, 
                 this.asteroids.roids[i].y) < this.ship.radius + this.asteroids.roids[i].radius) {
+                // console.log(this.asteroids.distBeteenPoints(this.ship.x, this.ship.y, this.asteroids.roids[i].x,
+                //     this.asteroids.roids[i].y));
+                // console.log(this.ship.radius + this.asteroids.roids[i].radius);
+                    
+                    this.exploting = true;
+                    this.exploat = 65;
                     this.explodeShip();
+
 
                     // alert('Game over!');
                     // document.location.reload();

@@ -5,7 +5,6 @@
 // const MovingObject = require("./moving_object.js");
 
 import Display from "./display";
-import Ship from "./ship";
 import { Howl } from "howler";
 
 

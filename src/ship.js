@@ -55,26 +55,26 @@ class Ship {
     }
 
     drawExplotion() {
-        this.ctx.strokeStyle = "darkred";
+        this.ctx.fillStyle = "darkred";
         this.ctx.beginPath();
         this.ctx.arc(this.x, this.y, this.radius * 1.7, 0, Math.PI * 2, false);
-        this.ctx.stroke();
-        this.ctx.strokeStyle = "red";
+        this.ctx.fill();
+        this.ctx.fillStyle = "red";
         this.ctx.beginPath();
         this.ctx.arc(this.x, this.y, this.radius * 1.4, 0, Math.PI * 2, false);
-        this.ctx.stroke();
-        this.ctx.strokeStyle = "orange";
+        this.ctx.fill();
+        this.ctx.fillStyle = "orange";
         this.ctx.beginPath();
         this.ctx.arc(this.x, this.y, this.radius * 1.1, 0, Math.PI * 2, false);
-        this.ctx.stroke();
-        this.ctx.strokeStyle = "yello";
+        this.ctx.fill();
+        this.ctx.fillStyle = "yello";
         this.ctx.beginPath();
         this.ctx.arc(this.x, this.y, this.radius * 0.8, 0, Math.PI * 2, false);
-        this.ctx.stroke();
-        this.ctx.strokeStyle = "white";
+        this.ctx.fill();
+        this.ctx.fillStyle = "white";
         this.ctx.beginPath();
         this.ctx.arc(this.x, this.y, this.radius * 0.5, 0, Math.PI * 2, false);
-        this.ctx.stroke();
+        this.ctx.fill();
     }
 
     drawThrust() {
