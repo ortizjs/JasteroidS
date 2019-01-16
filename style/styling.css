@@ -50,7 +50,8 @@ body{
 button{
     height: 50px;
     width: 100px;
-    margin-left: 20px;
+    margin-left: 85px;
+    /* margin-left: 40px; */
     margin-top: 20px;
     background-color:yellow;
     /* background-color: grey; */
@@ -112,6 +113,18 @@ button{
     margin-left: 40px;
     /* align-items: centers; */
 }
+
+.personal-links {
+    padding-top: 170px; 
+    padding-left: 210px; 
+    /* padding-left: 170px;  */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 10px;
+    width: 10px;
+}
+
 #game-canvas{
     /* background: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/BhBjRHe1Mj9qufshq/videoblocks-video-4k-animation-shinny-blue-stars-slowly-movement-in-black-galaxy-space-background-at-night_rlkmgjykg_thumbnail-full01.png"); */
     background-size: 100% 100%;
