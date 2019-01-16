@@ -1,24 +1,117 @@
 body{
     display: block;
+    height: 100%;
+    position: static;
     /* background-color: black; */
 }
 #body-div{
-    display: flex;
+    display: flex; 
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    /* border: 1px solid red; */
+    background-color: black;
+    /* border: 2px solid lawngreen; */
+    /* background-color: lightslategray; */
     /* flex-direction: column; */
 }
 
-.instructions-div {
-    display: flex;
-    align-content: left;
+.title-style {
+    border: 3px solid rgb(20, 133, 220);
+    width: 100%;
 }
+
+.title-tag {
+  
+  color: rgb(183, 208, 23);
+  /* text-shadow: white; */
+  font-family: 'Star Jedi', arial;
+  /* font-family: "ITC Serif Gothic", Lato; */
+  /* font-size: 1.5em; */
+  font-size: 25px;
+  /* left: -2em; */
+  letter-spacing: 0.4em;
+  /* right: -2em; */
+  text-align: center;
+  text-transform: uppercase;
+  text-shadow: 4px 4px 8px rgb(20, 133, 220);
+  /* -webkit-animation-name: shine; */
+  /* top: 29%; */
+}
+
+.body_div-2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    /* align-items: center; */
+    /* border: 1px solid green; */
+}
+
+button{
+    height: 50px;
+    width: 100px;
+    margin-left: 20px;
+    margin-top: 20px;
+    background-color:yellow;
+    /* background-color: grey; */
+    font-family: 'Star Jedi', arial;
+    font-size: 20px;
+    border: 2px solid rgb(20, 133, 220);
+    border-radius: 10px;
+    /* cursor: url("./imgs/spaceship.png"), auto; */
+    cursor: pointer;
+    /* text-emphasis-color: rgb(20, 133, 220); */
+    /* text-decoration-color: aqua; */
+}
+
+.instructions-contaier-div {
+    /* border: 1px solid lime; */
+    display: flex;
+    flex-direction: column;
+    align-content: right;
+    color: white;
+    /* color: rgb(183, 208, 23); */
+    font-family: 'Star Jedi', arial;
+    /* sfont-family: "ITC Serif Gothic", Lato; */
+    /* height: 80%; */
+}
+
+.instruction-title-div {
+    display: flex;
+    justify-content: center;
+    font-family: "ITC Serif Gothic", Lato;
+    color: white;
+    /* color: rgb(183, 208, 23); */
+    /* text-align: center; */
+    /* align-content: center; */
+    
+}
+
+.instructions-body-container-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* margin: 0 auto; */
+    /* align-content: center; */
+}
+
+.game-description-div {
+    text-align: center;
+    color: rgb(183, 208, 23);
+}
+.instructions-bullets-div {
+    margin-left: 40px;
+}
+
 
 .start-button-div {
+    /* border: 1px solid yellow; */
     display: flex;
-    align-content: left;
+    width: 70%;
+    justify-content: center;
+    margin-left: 40px;
+    /* align-items: centers; */
 }
-
 #game-canvas{
     /* background: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/BhBjRHe1Mj9qufshq/videoblocks-video-4k-animation-shinny-blue-stars-slowly-movement-in-black-galaxy-space-background-at-night_rlkmgjykg_thumbnail-full01.png"); */
     background-size: 100% 100%;

@@ -2,28 +2,56 @@
 <html>
 
     <head>
+        <link href="http://allfont.net/allfont.css?fonts=star-jedi" rel="stylesheet" type="text/css" />
         <title>JanimateS!</title>
-        <link type="text/css" rel="stylesheet" href="./style/styling.css">
+        <link type="text/css" rel="stylesheet" href="./style/styling.css" media="screen">
     </head>
     <body>
         <div id="body-div">
-            <h1>Jasteroids!</h1>
-            <div class="start-button-div">
-                <button>Start</button>
+            <div class="title-style">
+                <h1 class="title-tag">Jasteroids!</h1>
             </div>
-            <div class="instructions-div">
-                <p>
-                    Instructions:
-                </p>
-                <p>
-                    1 - Click start button 
-                    2 - Navigate the ship's direction by usin the Right and Left keys. 
-                    3 - Thrust the ship by pressing the Up key
-                    4 - Stay alive by navigating away from the asteroids
-                </p>
+            <div class="body_div-2">
+                <div class="instructions-contaier-div">
+                    <!-- <label>
+                        Instructions:
+                    </label> -->
+                    <div class="instruction-title-div">
+                        <h3>
+                            Instructions
+                        </h3>
+                    </div>
+                    <div class="instructions-body-container-div">
+                        <div class="game-description-div">
+                            <p>
+                                JasteroidS is a simple Javascript written replica of the 1979 Asteroids Atari game. Although shooting 
+                                has not yet been implemented, the user is able to navigate away from the incoming/moving asteroids
+                                by using the arrow keys. Please see istructions below
+                            </p>
+                        </div>
+                        <div class="instructions-bullets-div">
+                            <p>
+                                1 - Click start button. 
+                            </p>
+                            <p>
+                                2 - Navigate the ship's direction by using 
+                                the Right and Left keys. 
+                                
+                            </p>
+                            <p>
+                                3 - Thrust the ship by pressing the Up key.
+                                
+                            </p>
+                                4 - Stay alive by navigating away from the asteroids.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="start-button-div">
+                        <button>Start</button>
+                    </div>
+                </div>
+                <canvas id="game-canvas" width="900" height="700"></canvas>
             </div>
-            
-            <canvas id="game-canvas" width="900" height="700"></canvas>
         </div>
     <script src="./bundle.js"></script>
     <!-- <script src="./main.js"></script> -->
