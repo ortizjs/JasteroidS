@@ -3279,17 +3279,17 @@ class Asteroids {
         this.canvasWidth = canvasWidth;
         this.canvasHeight = canvasHeight;
         this.FPS = FPS;
-        this.roidSize = 100; // Starting size of asteroids in px
+        this.roidSize = 70; // Starting size of asteroids in px
         this.roidSpeed = 50; // Max starting speed of asteroids in pixels per second
         this.ctx = ctx;
         this.shipSize = shipSize;
         this.ship = ship;
         this.x;
         this.y;
-        this.roidsNum = 10; // starting number of asteroids 
+        this.roidsNum = 20; // starting number of asteroids 
         this.roids = [];
         this.roidsVertex = 10; // average number of vertices on each asteroid
-        this.roidJag = 0.4; //jaggerness of the asteroids (0 = none, 1 = lots)
+        this.roidJag = 0.6; //jaggerness of the asteroids (0 = none, 1 = lots)
         this.showBouding = false; // Shows/hide the collision boudning of each element in development mode.
         // this.createAsteroidsBelt = this.createAsteroidsBelt.bind(this);
         // this.newAsteroid = this.newAsteroid.bind(this);
