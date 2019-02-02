@@ -3448,6 +3448,7 @@ class Display {
         const begin = () => {
             this.frame = requestAnimationFrame(begin);
             this.renderItems();
+            document.getElementById("gameOver").style.display = "none";
             // this.asteroids.createAsteroidsBelt();
             // this.asteroids.moveAsteroids();
         };
