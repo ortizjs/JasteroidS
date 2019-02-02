@@ -3279,7 +3279,7 @@ class Asteroids {
         this.canvasWidth = canvasWidth;
         this.canvasHeight = canvasHeight;
         this.FPS = FPS;
-        this.roidSize = 70; // Starting size of asteroids in px
+        this.roidSize = 50; // Starting size of asteroids in px
         this.roidSpeed = 50; // Max starting speed of asteroids in pixels per second
         this.ctx = ctx;
         this.shipSize = shipSize;
@@ -3428,7 +3428,7 @@ class Display {
         this.keyDown = this.keyDown.bind(this);
         this.keyUp = this.keyUp.bind(this);
         this.FPS = 30;  // frames per seconds
-        this.friction = 0.7; //friction of spaceship (0 - 1)
+        this.friction = 0.95; //friction of spaceship (0 - 1)
         this.asteroids = new _asteroids__WEBPACK_IMPORTED_MODULE_1__["default"](canvasWidth, canvasHeight, this.FPS, ctx, this.ship.shipSize, this.ship);
         this.showBouding = false;
         this.shipExplodeTime = 0;
@@ -3437,9 +3437,6 @@ class Display {
         this.background.src ="./imgs/backgroundimg.png";
         this.exploting = false;
         this.exploat = 0;
-        // 
-
-
 
         document.addEventListener("keydown", this.keyDown);
         document.addEventListener("keyup", this.keyUp);
@@ -3456,6 +3453,24 @@ class Display {
         };
         begin();
     }
+
+    endGame(){
+        const end = () => {
+            this.frame.cancelAnimationFrmae(end);
+        };
+        end();
+    }
+    // endGame(){
+    //     const end = () => {
+    //         this.frame.cancelAnimationFrmae(end);
+    //     };
+    // }
+
+    // window.cancelAnimationFrame(requestID);
+    // alertAndReload() {
+    //     document.location.reload();
+    //     alert('Game over!');
+    // }
 
 
     keyDown(event) {
@@ -3499,17 +3514,16 @@ class Display {
         console.log(this.exploat = 65);
         console.log("Exploded");
         if (this.exploat === 65) {
-            console.log(this.ship.x, this.ship.y);
-            // setTimeout(this.alertAndReload(), 200);
-        }
-        
+            console.log(this.ship.x, this.ship.y);        }
+    
         
     }
     
-    alertAndReload() {
-        document.location.reload();
-        alert('Game over!');
-    }
+    
+    // alertAndReload() {
+    //     document.location.reload();
+    //     alert('Game over!');
+    // }
 
     renderItems() {
         //create background/canvas
@@ -3531,7 +3545,8 @@ class Display {
         } else {
             //draw the explotion
             this.ship.drawExplotion();
-            setTimeout(this.alertAndReload(), 2000);
+            // setTimeout(this.alertAndReload(), 2000);
+            setTimeout(document.getElementById(""));
         }
 
 
@@ -3575,8 +3590,6 @@ class Display {
             this.ship.y = 0 - this.ship.radius;
         }
 
-
-
         //draw the asteroids 
         this.asteroids.drawAsteroids();        
 
@@ -3608,17 +3621,10 @@ class Display {
         for (let i = 0; i < this.asteroids.roids.length; i++) {
             if (this.asteroids.distBeteenPoints(this.ship.x, this.ship.y, this.asteroids.roids[i].x, 
                 this.asteroids.roids[i].y) < this.ship.radius + this.asteroids.roids[i].radius) {
-                // console.log(this.asteroids.distBeteenPoints(this.ship.x, this.ship.y, this.asteroids.roids[i].x,
-                //     this.asteroids.roids[i].y));
-                // console.log(this.ship.radius + this.asteroids.roids[i].radius);
-                    
                     this.exploting = true;
                     this.exploat = 65;
                     this.explodeShip();
-
-
-                    // alert('Game over!');
-                    // document.location.reload();
+                    // this.endGame();
             }
         }
     }

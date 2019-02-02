@@ -1,19 +1,23 @@
+* {
+  box-sizing: border-box;
+}
+
 body{
-    display: block;
+    /* display: block; */
     height: 100%;
-    position: static;
-    /* background-color: black; */
+    /* position: static; */
+    margin: 0;
+    /* style="margin: 0; */
+    
 }
 #body-div{
     display: flex; 
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
     /* border: 1px solid red; */
     background-color: black;
-    /* border: 2px solid lawngreen; */
-    /* background-color: lightslategray; */
-    /* flex-direction: column; */
+    height: 100%;
 }
 
 .title-style {
@@ -22,7 +26,7 @@ body{
 }
 
 .title-tag {
-  
+  /* color: rgb(181, 31, 31); */
   color: rgb(183, 208, 23);
   /* text-shadow: white; */
   font-family: 'Star Jedi', arial;
@@ -43,26 +47,22 @@ body{
     display: flex;
     flex-direction: row;
     justify-content: center;
-    /* align-items: center; */
-    /* border: 1px solid green; */
+    height: 100%;
+    /* -webkit-box-sizing: border-box; */
 }
 
 button{
     height: 50px;
     width: 100px;
     margin-left: 85px;
-    /* margin-left: 40px; */
     margin-top: 20px;
+    /* background-color:red; */
     background-color:yellow;
-    /* background-color: grey; */
     font-family: 'Star Jedi', arial;
     font-size: 20px;
     border: 2px solid rgb(20, 133, 220);
     border-radius: 10px;
-    /* cursor: url("./imgs/spaceship.png"), auto; */
     cursor: pointer;
-    /* text-emphasis-color: rgb(20, 133, 220); */
-    /* text-decoration-color: aqua; */
 }
 
 .instructions-contaier-div {
@@ -82,6 +82,7 @@ button{
     justify-content: center;
     font-family: "ITC Serif Gothic", Lato;
     color: white;
+    /* border: 1px solid pink; */
     /* color: rgb(183, 208, 23); */
     /* text-align: center; */
     /* align-content: center; */
@@ -125,8 +126,16 @@ button{
     width: 10px;
 }
 
+.canvas-div {
+    height: 100%;
+    width: 100%;
+}
+
 #game-canvas{
     /* background: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/BhBjRHe1Mj9qufshq/videoblocks-video-4k-animation-shinny-blue-stars-slowly-movement-in-black-galaxy-space-background-at-night_rlkmgjykg_thumbnail-full01.png"); */
     background-size: 100% 100%;
     display: block; 
+    /* border: 1px solid purple; */
+    height: 100%;
+    /* width: 100%; */
 }

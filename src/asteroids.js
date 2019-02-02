@@ -3,7 +3,7 @@ class Asteroids {
         this.canvasWidth = canvasWidth;
         this.canvasHeight = canvasHeight;
         this.FPS = FPS;
-        this.roidSize = 70; // Starting size of asteroids in px
+        this.roidSize = 50; // Starting size of asteroids in px
         this.roidSpeed = 50; // Max starting speed of asteroids in pixels per second
         this.ctx = ctx;
         this.shipSize = shipSize;
