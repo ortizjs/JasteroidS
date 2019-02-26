@@ -3341,24 +3341,19 @@ class Asteroids {
     //     let x, y, radius, angle, vert, offs;
     //     for (let i = 0; i < this.roids.length; i++) {
     //         //move the asteroid 
-
     //         this.roids[i].x += this.roids[i].xVelocity;
     //         this.roids[i].y += this.roids[i].yVelocity;
-
     //         //handle the edges of the screen
-
     //         if (this.roids[i].x < 0 - this.roids[i].radius) {
     //             this.roids[i].x = this.canvasWidth + this.roids[i].radius;
     //         } else if (this.roids[i].x > this.canvasWidth + this.roids[i].radius) {
     //             this.roids[i].x = 0 - this.roids[i].radius;
     //         }
-
     //         if (this.roids[i].y < 0 - this.roids[i].radius) {
     //             this.roids[i].y = this.canvasWidth + this.roids[i].radius;
     //         } else if (this.roids[i].y > this.canvasWidth + this.roids[i].radius) {
     //             this.roids[i].y = 0 - this.roids[i].radius;
     //         }
-
     //     }
     // }
 
@@ -3434,9 +3429,11 @@ class Display {
         this.shipExplodeTime = 0;
         this.shipExplodeDuration = 0.3; 
         this.background = new Image();
-        this.background.src ="./imgs/backgroundimg.png";
+        // this.background.src ="";
+        this.background.src ="../imgs/gamebackground.jpg";
         this.exploting = false;
         this.exploat = 0;
+        this.frame;
 
         document.addEventListener("keydown", this.keyDown);
         document.addEventListener("keyup", this.keyUp);
@@ -3447,8 +3444,9 @@ class Display {
     startGame(){
         const begin = () => {
             this.frame = requestAnimationFrame(begin);
+            document.getElementById("gameOver-modal").style.display = "none";
+            // debugger
             this.renderItems();
-            document.getElementById("gameOver").style.display = "none";
             // this.asteroids.createAsteroidsBelt();
             // this.asteroids.moveAsteroids();
         };
@@ -3457,22 +3455,17 @@ class Display {
 
     endGame(){
         const end = () => {
-            this.frame.cancelAnimationFrmae(end);
+            window.cancelAnimationFrame(end);
+            document.getElementById("gameOver-modal").style.display = "block";
         };
         end();
     }
+
     // endGame(){
     //     const end = () => {
-    //         this.frame.cancelAnimationFrmae(end);
+    //         this.frame.cancelAnimationFrame(end);
     //     };
     // }
-
-    // window.cancelAnimationFrame(requestID);
-    // alertAndReload() {
-    //     document.location.reload();
-    //     alert('Game over!');
-    // }
-
 
     keyDown(event) {
         switch (event.keyCode) {
@@ -3506,6 +3499,7 @@ class Display {
     //     return this.ship.explodeTime > 0;
     // }
 
+
     explodeShip() {
         this.shipExplodeTime = Math.ceil(this.shipExplodeDuration * this.FPS);
     //     this.exploting = this.shipExplodeTime > 0;
@@ -3515,21 +3509,17 @@ class Display {
         console.log(this.exploat = 65);
         console.log("Exploded");
         if (this.exploat === 65) {
-            console.log(this.ship.x, this.ship.y);        }
-    
-        
+            console.log(this.ship.x, this.ship.y);
+            // this.endGame();
+            return;
+            // this.cancelAnimationFrame(this.frame);
+        }
     }
-    
-    
-    // alertAndReload() {
-    //     document.location.reload();
-    //     alert('Game over!');
-    // }
+
 
     renderItems() {
         //create background/canvas
-        // this.ctx.fillStyle = "black";
-        // this.ctx.fillRect(0, 0, this.canvasWidth, this.canvasHeight);
+
         this.ctx.drawImage(this.background, 0, 0);
 
         //Collision bounding
@@ -3539,7 +3529,6 @@ class Display {
         }
 
         //draw the player ship or explotion
-        // this.ship.drawShip();
 
         if (!this.exploting) {
             this.ship.drawShip();
@@ -3624,8 +3613,9 @@ class Display {
                 this.asteroids.roids[i].y) < this.ship.radius + this.asteroids.roids[i].radius) {
                     this.exploting = true;
                     this.exploat = 65;
-                    this.explodeShip();
-                    // this.endGame();
+                    // this.explodeShip();
+                    this.endGame();
+                    // this.ship.drawShip();
             }
         }
     }
@@ -3647,12 +3637,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _display__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./display */ "./src/display.js");
 /* harmony import */ var howler__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! howler */ "./node_modules/howler/dist/howler.js");
 /* harmony import */ var howler__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(howler__WEBPACK_IMPORTED_MODULE_1__);
-// import _ from 'lodash';
-
-// const Game = require("./game");
-// const GameView = require("./game_view");
-// const MovingObject = require("./moving_object.js");
-
 
 
 
@@ -3662,24 +3646,39 @@ document.addEventListener("DOMContentLoaded", () => {
     let canvasWidth = canv.width; 
     let canvasHeight = canv.height; 
     let ctx = canv.getContext('2d'); 
-    var gameSound = new howler__WEBPACK_IMPORTED_MODULE_1__["Howl"]({
-        src: ["/src/background.mp3"],
-        buffer: true,
-        loop: true
-    });
+    // let ctx = canv.getContext('2d'); 
+
+    // var gameSound = new Howl({
+    //     src: ["/src/background.mp3"],
+    //     buffer: true,
+    //     loop: true
+    // });
 
     var spaceShipSound = new howler__WEBPACK_IMPORTED_MODULE_1__["Howl"]({
-        src: ["/src/spaceship_sound.mp3"],
-        // buffer: true,
-        // loop: true
+        src: ["/src/spaceship_sound.mp3"]
     });
 
-    let game = new _display__WEBPACK_IMPORTED_MODULE_0__["default"](canvasWidth, canvasHeight, ctx, spaceShipSound);
-    document.querySelector("button").addEventListener("click", () => {
-        game.startGame();
-        gameSound.play();
-        // spaceShipSound.play();
+    // let game = new Display(canvasWidth, canvasHeight, ctx, spaceShipSound);
+    let game;
+    let gameRestart = new _display__WEBPACK_IMPORTED_MODULE_0__["default"](canvasWidth, canvasHeight, ctx, spaceShipSound);
+
+    // document.querySelector("button").addEventListener("click", () => {
+    //     game.startGame();
+    //     // gameSound.play();
+    //     // spaceShipSound.play();
+    // });
+
+    document.addEventListener("click", (event) => {
+        if (event.target.classList.contains("start")){
+            game = new _display__WEBPACK_IMPORTED_MODULE_0__["default"](canvasWidth, canvasHeight, ctx, spaceShipSound);
+            game.startGame();
+            // gameSound.play();
+            // spaceShipSound.play();
+
+        }
     });
+
+
 });
 
 /// python -m SimpleHTTPServer   <------- run server for audio

@@ -18,9 +18,11 @@ class Display {
         this.shipExplodeTime = 0;
         this.shipExplodeDuration = 0.3; 
         this.background = new Image();
-        this.background.src ="./imgs/backgroundimg.png";
+        // this.background.src ="";
+        this.background.src ="../imgs/gamebackground.jpg";
         this.exploting = false;
         this.exploat = 0;
+        this.frame;
 
         document.addEventListener("keydown", this.keyDown);
         document.addEventListener("keyup", this.keyUp);
@@ -31,8 +33,9 @@ class Display {
     startGame(){
         const begin = () => {
             this.frame = requestAnimationFrame(begin);
+            document.getElementById("gameOver-modal").style.display = "none";
+            // debugger
             this.renderItems();
-            document.getElementById("gameOver").style.display = "none";
             // this.asteroids.createAsteroidsBelt();
             // this.asteroids.moveAsteroids();
         };
@@ -41,22 +44,17 @@ class Display {
 
     endGame(){
         const end = () => {
-            this.frame.cancelAnimationFrmae(end);
+            window.cancelAnimationFrame(end);
+            document.getElementById("gameOver-modal").style.display = "block";
         };
         end();
     }
+
     // endGame(){
     //     const end = () => {
-    //         this.frame.cancelAnimationFrmae(end);
+    //         this.frame.cancelAnimationFrame(end);
     //     };
     // }
-
-    // window.cancelAnimationFrame(requestID);
-    // alertAndReload() {
-    //     document.location.reload();
-    //     alert('Game over!');
-    // }
-
 
     keyDown(event) {
         switch (event.keyCode) {
@@ -90,6 +88,7 @@ class Display {
     //     return this.ship.explodeTime > 0;
     // }
 
+
     explodeShip() {
         this.shipExplodeTime = Math.ceil(this.shipExplodeDuration * this.FPS);
     //     this.exploting = this.shipExplodeTime > 0;
@@ -99,21 +98,17 @@ class Display {
         console.log(this.exploat = 65);
         console.log("Exploded");
         if (this.exploat === 65) {
-            console.log(this.ship.x, this.ship.y);        }
-    
-        
+            console.log(this.ship.x, this.ship.y);
+            // this.endGame();
+            return;
+            // this.cancelAnimationFrame(this.frame);
+        }
     }
-    
-    
-    // alertAndReload() {
-    //     document.location.reload();
-    //     alert('Game over!');
-    // }
+
 
     renderItems() {
         //create background/canvas
-        // this.ctx.fillStyle = "black";
-        // this.ctx.fillRect(0, 0, this.canvasWidth, this.canvasHeight);
+
         this.ctx.drawImage(this.background, 0, 0);
 
         //Collision bounding
@@ -123,7 +118,6 @@ class Display {
         }
 
         //draw the player ship or explotion
-        // this.ship.drawShip();
 
         if (!this.exploting) {
             this.ship.drawShip();
@@ -208,8 +202,9 @@ class Display {
                 this.asteroids.roids[i].y) < this.ship.radius + this.asteroids.roids[i].radius) {
                     this.exploting = true;
                     this.exploat = 65;
-                    this.explodeShip();
-                    // this.endGame();
+                    // this.explodeShip();
+                    this.endGame();
+                    // this.ship.drawShip();
             }
         }
     }

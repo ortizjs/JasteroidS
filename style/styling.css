@@ -3,10 +3,16 @@
 }
 
 body{
-    /* display: block; */
+    line-height: 1.5;
     height: 100%;
-    /* position: static; */
     margin: 0;
+    background: url('../imgs/gamebackground.jpg') no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    /* display: block; */
+    /* position: static; */
     /* style="margin: 0; */
     
 }
@@ -29,13 +35,12 @@ body{
   /* color: rgb(181, 31, 31); */
   color: rgb(183, 208, 23);
   /* text-shadow: white; */
+  
   font-family: 'Star Jedi', arial;
   /* font-family: "ITC Serif Gothic", Lato; */
   /* font-size: 1.5em; */
   font-size: 25px;
-  /* left: -2em; */
   letter-spacing: 0.4em;
-  /* right: -2em; */
   text-align: center;
   text-transform: uppercase;
   text-shadow: 4px 4px 8px rgb(20, 133, 220);
@@ -43,7 +48,8 @@ body{
   /* top: 29%; */
 }
 
-.body_div-2 {
+.body-div-2 {
+    /* border: 1px solid lime; */
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -66,6 +72,7 @@ button{
 }
 
 .instructions-contaier-div {
+    background: url('../imgs/gamebackground.jpg') no-repeat center center fixed; 
     /* border: 1px solid lime; */
     display: flex;
     flex-direction: column;
@@ -93,6 +100,8 @@ button{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    background: url('../imgs/gamebackground.jpg') no-repeat center center fixed; 
+    /* background-color: none; */
     /* margin: 0 auto; */
     /* align-content: center; */
 }
@@ -102,11 +111,20 @@ button{
     color: rgb(183, 208, 23);
 }
 .instructions-bullets-div {
-    margin-left: 40px;
+    /* margin-left: 40px; */
 }
 
 
 .start-button-div {
+    /* border: 1px solid yellow; */
+    display: flex;
+    width: 70%;
+    justify-content: center;
+    margin-left: 40px;
+    /* align-items: centers; */
+}
+
+.re-start-button-div {
     /* border: 1px solid yellow; */
     display: flex;
     width: 70%;
@@ -127,11 +145,14 @@ button{
 }
 
 .canvas-div {
+    position: relative;
     height: 100%;
     width: 100%;
+    /* border: 1px solid red; */
 }
 
 #game-canvas{
+    background: url('../imgs/gamebackground.jpg') no-repeat center center fixed; 
     /* background: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/BhBjRHe1Mj9qufshq/videoblocks-video-4k-animation-shinny-blue-stars-slowly-movement-in-black-galaxy-space-background-at-night_rlkmgjykg_thumbnail-full01.png"); */
     background-size: 100% 100%;
     display: block; 
@@ -140,10 +161,58 @@ button{
     /* width: 100%; */
 }
 
-.gameOver {
-    display: block;
+#gameOver-modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    /* overflow: auto; */
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
 }
 
 .gameOver-inner {
-
+  /* background-color: transparent; */
+  /* background-color: #fefefe; */
+  background-color: rgb(247, 244, 244);
+  /* Fallback color */
+  background-color: rgba(56, 85, 128, 0.4);
+  /* Black w/ opacity */
+  margin: 5% auto; /* 5% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%; /* Could be more or less, depending on screen size */
+  /* Height: 100vh; */
+  /* Height: calc(100vh - 100px); */
+  height: 50%;
 }
+
+.game-over-label {
+    color: rgb(183, 208, 23);
+    font-family: 'Star Jedi', arial;
+    text-transform: uppercase;
+    text-shadow: 4px 4px 8px rgb(20, 133, 220);
+    text-align: center;
+    /* color: red; */
+    /* font-family: "ITC Serif Gothic", Lato; */
+    font-size: 75px;
+}
+
+.re-start-button-div {
+    display: flex;
+    width: 70%;
+    justify-content: center;
+    /* margin-left: 100px; */
+}
+

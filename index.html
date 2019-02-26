@@ -12,7 +12,7 @@
             <div class="title-style">
                 <h1 class="title-tag">Jasteroids!</h1>
             </div>
-            <div class="body_div-2">
+            <div class="body-div-2">
                 <div class="instructions-contaier-div">
                     <!-- <label>
                         Instructions:
@@ -51,7 +51,7 @@
                         </div>
                     </div>
                     <div class="start-button-div">
-                        <button>Start</button>
+                        <button class="start" >Start</button>
                     </div>
                     <div class="personal-links">
                         <div class="github-link-div">
@@ -71,16 +71,22 @@
                     <canvas id="game-canvas" width="900" height="700"></canvas>
                 </div>
 
-                <div class="gameOver">
-                    <div class="gameOver-inner">
-                        <label for="gameOver">Gave Over!
-                            <div class="start-button-div">
-                                <button>Start</button>
-                            </div>
-                        </label>
-                    </div>
-                </div>
                 
+            </div>
+            <div id="gameOver-modal" class="gameOver-modal">
+                <div class="gameOver-inner">
+
+                    <!-- <label class="game-over-label" for="gameOver">
+                        Gave Over!
+                    </label> -->
+                    <h2 class="game-over-label">
+                        Gave Over!
+                    </h2>
+                    <div class="re-start-button-div" id="restartbuttondiv">
+                        <button class="start" >Restart</button>
+                    </div>
+
+                </div>
             </div>
             
         </div>
