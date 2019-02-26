@@ -6,7 +6,7 @@ body{
     line-height: 1.5;
     height: 100%;
     margin: 0;
-    background: url('../imgs/gamebackground.jpg') no-repeat center center fixed; 
+    /* background: url('../imgs/gamebackground.jpg') no-repeat center center fixed;  */
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -22,7 +22,9 @@ body{
     justify-content: center;
     align-items: center;
     /* border: 1px solid red; */
-    background-color: black;
+    /* background-color: black; */
+    background: url('../imgs/gamebackground.jpg'); 
+    /* background: url('../imgs/gamebackground.jpg') no-repeat center center fixed;  */
     height: 100%;
 }
 
@@ -50,6 +52,8 @@ body{
 
 .body-div-2 {
     /* border: 1px solid lime; */
+    /* background: url('../imgs/gamebackground.jpg') no-repeat fixed;  */
+    /* background: url('../imgs/gamebackground.jpg') no-repeat center center fixed;  */
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -72,7 +76,8 @@ button{
 }
 
 .instructions-contaier-div {
-    background: url('../imgs/gamebackground.jpg') no-repeat center center fixed; 
+    background-color: none;
+    /* background: url('../imgs/gamebackground.jpg') no-repeat center center fixed;  */
     /* border: 1px solid lime; */
     display: flex;
     flex-direction: column;
@@ -100,7 +105,7 @@ button{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background: url('../imgs/gamebackground.jpg') no-repeat center center fixed; 
+    /* background: url('../imgs/gamebackground.jpg') no-repeat center center fixed;  */
     /* background-color: none; */
     /* margin: 0 auto; */
     /* align-content: center; */
@@ -152,12 +157,13 @@ button{
 }
 
 #game-canvas{
-    background: url('../imgs/gamebackground.jpg') no-repeat center center fixed; 
+    /* background-color: transparent; */
+    /* background: url('../imgs/gamebackground.jpg') no-repeat center center fixed;  */
     /* background: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/BhBjRHe1Mj9qufshq/videoblocks-video-4k-animation-shinny-blue-stars-slowly-movement-in-black-galaxy-space-background-at-night_rlkmgjykg_thumbnail-full01.png"); */
-    background-size: 100% 100%;
-    display: block; 
+    /* background-size: 100% 100%; */
+    /* display: block;  */
     /* border: 1px solid purple; */
-    height: 100%;
+    /* height: 100%; */
     /* width: 100%; */
 }
 
@@ -210,7 +216,7 @@ button{
 }
 
 .re-start-button-div {
-    display: flex;
+    /* display: flex; */
     width: 70%;
     justify-content: center;
     /* margin-left: 100px; */

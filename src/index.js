@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let canvasWidth = canv.width; 
     let canvasHeight = canv.height; 
     let ctx = canv.getContext('2d'); 
-    // let ctx = canv.getContext('2d'); 
 
     // var gameSound = new Howl({
     //     src: ["/src/background.mp3"],
@@ -28,6 +27,13 @@ document.addEventListener("DOMContentLoaded", () => {
     //     // gameSound.play();
     //     // spaceShipSound.play();
     // });
+
+    // let background = new Image();
+    // background.src = "https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/BhBjRHe1Mj9qufshq/videoblocks-video-4k-animation-shinny-blue-stars-slowly-movement-in-black-galaxy-space-background-at-night_rlkmgjykg_thumbnail-full01.png";
+    // // background.src = "./images/dark-sky.jpg";
+    // this.ctx.drawImage(background, 0, 0, canv.width, canv.height);
+
+
 
     document.addEventListener("click", (event) => {
         if (event.target.classList.contains("start")){
