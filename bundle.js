@@ -3419,11 +3419,12 @@ class Display {
         this.canvasHeight = canvasHeight;
         this.ctx = ctx;
         this.spaceShipSound = spaceShipSound;
-        this.shipExplodeDuration = 0.3; //Duration of the ship's explotation. 
-        this.shipExplodeInvDuration = 3; //Duration of the ship's invisibility in seconds. 
-        this.shipBlinkDuration = 0.1; //Duration of the ship's blink during invisibility in seconds. 
+        // this.shipExplodeDuration = 0.3; //Duration of the ship's explotation. 
+        // this.shipExplodeInvDuration = 3; //Duration of the ship's invisibility in seconds. 
+        // this.shipBlinkDuration = 0.1; //Duration of the ship's blink during invisibility in seconds. 
         this.background = new Image();
-        this.ship = new _ship__WEBPACK_IMPORTED_MODULE_0__["default"](canvasWidth, canvasHeight, ctx, this.shipBlinkDuration, this.FPS, this.shipExplodeInvDuration);
+        this.ship = new _ship__WEBPACK_IMPORTED_MODULE_0__["default"](canvasWidth, canvasHeight, ctx);
+        // this.ship = new Ship(canvasWidth, canvasHeight, ctx, this.shipBlinkDuration, this.FPS, this.shipExplodeInvDuration);
         this.keyDown = this.keyDown.bind(this);
         this.keyUp = this.keyUp.bind(this);
         this.FPS = 30;  // frames per seconds
@@ -3490,11 +3491,6 @@ class Display {
                 break;
         }
     }
-
-    // exploding() {
-    //     return this.ship.explodeTime > 0;
-    // }
-
 
     explodeShip() {
         this.ship.explodeTime = Math.ceil(this.shipExplodeDuration * this.FPS);
@@ -3760,7 +3756,8 @@ document.addEventListener("DOMContentLoaded", () => {
 __webpack_require__.r(__webpack_exports__);
 
 class Ship {
-    constructor(canvasHeight, canvasWidth, ctx, shipBlinkDuration, FPS, shipExplodeInvDuration) {
+    // constructor(canvasHeight, canvasWidth, ctx, shipBlinkDuration, FPS, shipExplodeInvDuration) {
+    constructor(canvasHeight, canvasWidth, ctx) {
         this.canvasHeight = canvasHeight;
         this.canvasWidth = canvasWidth;
         this.shipSize = 30; // ship height in px
@@ -3776,11 +3773,11 @@ class Ship {
         this.thrustX = 0;        
         this.thrustY = 0;    
         this.explodeTime = 0;
-        this.shipBlinkDuration = shipBlinkDuration;
-        this.shipExplodeInvDuration = shipExplodeInvDuration;
-        this.FPS = FPS;
-        this.blinkNum = Math.ceil(shipExplodeInvDuration / shipBlinkDuration);
-        this.blinkTime = Math.ceil(shipBlinkDuration + this.FPS);
+        // this.shipBlinkDuration = shipBlinkDuration;
+        // this.shipExplodeInvDuration = shipExplodeInvDuration;
+        // this.FPS = FPS;
+        // this.blinkNum = Math.ceil(shipExplodeInvDuration / shipBlinkDuration);
+        // this.blinkTime = Math.ceil(shipBlinkDuration + this.FPS);
         // this.shipExplodeDuration = 0.3; //Duration of the ship explosion
 
         this.thrust = {

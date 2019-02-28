@@ -8,11 +8,12 @@ class Display {
         this.canvasHeight = canvasHeight;
         this.ctx = ctx;
         this.spaceShipSound = spaceShipSound;
-        this.shipExplodeDuration = 0.3; //Duration of the ship's explotation. 
-        this.shipExplodeInvDuration = 3; //Duration of the ship's invisibility in seconds. 
-        this.shipBlinkDuration = 0.1; //Duration of the ship's blink during invisibility in seconds. 
+        // this.shipExplodeDuration = 0.3; //Duration of the ship's explotation. 
+        // this.shipExplodeInvDuration = 3; //Duration of the ship's invisibility in seconds. 
+        // this.shipBlinkDuration = 0.1; //Duration of the ship's blink during invisibility in seconds. 
         this.background = new Image();
-        this.ship = new Ship(canvasWidth, canvasHeight, ctx, this.shipBlinkDuration, this.FPS, this.shipExplodeInvDuration);
+        this.ship = new Ship(canvasWidth, canvasHeight, ctx);
+        // this.ship = new Ship(canvasWidth, canvasHeight, ctx, this.shipBlinkDuration, this.FPS, this.shipExplodeInvDuration);
         this.keyDown = this.keyDown.bind(this);
         this.keyUp = this.keyUp.bind(this);
         this.FPS = 30;  // frames per seconds
@@ -79,11 +80,6 @@ class Display {
                 break;
         }
     }
-
-    // exploding() {
-    //     return this.ship.explodeTime > 0;
-    // }
-
 
     explodeShip() {
         this.ship.explodeTime = Math.ceil(this.shipExplodeDuration * this.FPS);

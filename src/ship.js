@@ -1,6 +1,7 @@
 
 class Ship {
-    constructor(canvasHeight, canvasWidth, ctx, shipBlinkDuration, FPS, shipExplodeInvDuration) {
+    // constructor(canvasHeight, canvasWidth, ctx, shipBlinkDuration, FPS, shipExplodeInvDuration) {
+    constructor(canvasHeight, canvasWidth, ctx) {
         this.canvasHeight = canvasHeight;
         this.canvasWidth = canvasWidth;
         this.shipSize = 30; // ship height in px
@@ -16,11 +17,11 @@ class Ship {
         this.thrustX = 0;        
         this.thrustY = 0;    
         this.explodeTime = 0;
-        this.shipBlinkDuration = shipBlinkDuration;
-        this.shipExplodeInvDuration = shipExplodeInvDuration;
-        this.FPS = FPS;
-        this.blinkNum = Math.ceil(shipExplodeInvDuration / shipBlinkDuration);
-        this.blinkTime = Math.ceil(shipBlinkDuration + this.FPS);
+        // this.shipBlinkDuration = shipBlinkDuration;
+        // this.shipExplodeInvDuration = shipExplodeInvDuration;
+        // this.FPS = FPS;
+        // this.blinkNum = Math.ceil(shipExplodeInvDuration / shipBlinkDuration);
+        // this.blinkTime = Math.ceil(shipBlinkDuration + this.FPS);
         // this.shipExplodeDuration = 0.3; //Duration of the ship explosion
 
         this.thrust = {
