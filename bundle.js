@@ -3507,7 +3507,7 @@ class Display {
         if (this.exploat === 65) {
             console.log(this.ship.x, this.ship.y);
             // this.endGame();
-            return;
+            // return;
             // this.cancelAnimationFrame(this.frame);
         }
     }
