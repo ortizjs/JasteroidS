@@ -3419,16 +3419,18 @@ class Display {
         this.canvasHeight = canvasHeight;
         this.ctx = ctx;
         this.spaceShipSound = spaceShipSound;
-        this.ship = new _ship__WEBPACK_IMPORTED_MODULE_0__["default"](canvasWidth, canvasHeight, ctx);
+        this.shipExplodeDuration = 0.3; //Duration of the ship's explotation. 
+        this.shipExplodeInvDuration = 3; //Duration of the ship's invisibility in seconds. 
+        this.shipBlinkDuration = 0.1; //Duration of the ship's blink during invisibility in seconds. 
+        this.background = new Image();
+        this.ship = new _ship__WEBPACK_IMPORTED_MODULE_0__["default"](canvasWidth, canvasHeight, ctx, this.shipBlinkDuration, this.FPS, this.shipExplodeInvDuration);
         this.keyDown = this.keyDown.bind(this);
         this.keyUp = this.keyUp.bind(this);
         this.FPS = 30;  // frames per seconds
         this.friction = 0.95; //friction of spaceship (0 - 1)
         this.asteroids = new _asteroids__WEBPACK_IMPORTED_MODULE_1__["default"](canvasWidth, canvasHeight, this.FPS, ctx, this.ship.shipSize, this.ship);
         this.showBouding = false;
-        this.shipExplodeTime = 0;
-        this.shipExplodeDuration = 0.3; 
-        this.background = new Image();
+        // this.shipExplodeTime = 0;
         // this.background.src ="";
         this.background.src ="../imgs/gamebackground.jpg";
         this.exploting = false;
@@ -3501,12 +3503,12 @@ class Display {
 
 
     explodeShip() {
-        this.shipExplodeTime = Math.ceil(this.shipExplodeDuration * this.FPS);
+        this.ship.explodeTime = Math.ceil(this.shipExplodeDuration * this.FPS);
     //     this.exploting = this.shipExplodeTime > 0;
     // console.log(this.exploting, this.shipExplodeTime);
     
-        this.ship.drawExplotion();
-        console.log(this.exploat = 65);
+        // this.ship.drawExplotion();
+        console.log(this.exploat === 65);
         console.log("Exploded");
         if (this.exploat === 65) {
             console.log(this.ship.x, this.ship.y);
@@ -3516,8 +3518,16 @@ class Display {
         }
     }
 
+    newShip() {
+        return this.ship.drawShip();
+    }
+
 
     renderItems() {
+        //Boolean for whether the ship is exploding.
+        let blinkOn = this.ship.blinkNum % 2 == 0;
+        let exploding = this.ship.explodeTime > 0;
+
         //create background/canvas
 
         this.ctx.drawImage(this.background, 0, 0);
@@ -3525,18 +3535,35 @@ class Display {
         //Collision bounding
         if (this.showBouding) {
             this.ship.drawBouding();
-
         }
 
         //draw the player ship or explotion
 
         if (!this.exploting) {
-            this.ship.drawShip();
+        //     console.log("NLINK ON:", this.ship.blinkNum);
+        //     if (blinkOn) {
+                this.ship.drawShip();
+        //     }
+
+            // handle blinking 
+            // if (this.ship.blinkNum > 0) {
+            //     // reduce the blink time
+            //     this.ship.blinkTime--;
+
+            //     //reduce the blink num
+            //     if (this.ship.blinkTime == 0) {
+            //         this.ship.blinkTime = Math.ceil(this.ship.shipBlinkDuration * this.FPS);
+            //         this.ship.blinkNum--;
+            //     }
+            // }
+            
         } else {
-            //draw the explotion
+            // draw the explotion
             this.ship.drawExplotion();
+            this.endGame();
+            // this.exploting = false;
             // setTimeout(this.alertAndReload(), 2000);
-            setTimeout(document.getElementById(""));
+            // setTimeout(document.getElementById(""));
         }
 
 
@@ -3554,14 +3581,46 @@ class Display {
             this.ship.thrust.y -= this.friction * this.ship.thrust.y / this.FPS;
         }
 
-        //rotate ship
-        this.ship.angle += this.ship.rotation;
-
-        //move the ship
+        //check asteroid collision
         if (!this.exploting) {
+            for (let i = 0; i < this.asteroids.roids.length; i++) {
+                if (this.asteroids.distBeteenPoints(this.ship.x, this.ship.y, this.asteroids.roids[i].x,
+                    this.asteroids.roids[i].y) < this.ship.radius + this.asteroids.roids[i].radius) {
+                    this.exploting = true;
+                    this.exploat = 65;
+                    this.explodeShip();
+                    // this.endGame();
+                    // this.ship.drawShip();
+                }
+            }
+            //rotate ship
+            this.ship.angle += this.ship.rotation;
+
+            //move the ship
+
             this.ship.x += this.ship.thrust.x;
             this.ship.y += this.ship.thrust.y;
+        } else {
+            // this.ship.explodeTime--;
+            if (this.ship.explodeTime == 0) {
+                this.exploting = false;
+                // this.newShip();
+                this.ship.drawShip();
+            } 
         }
+
+
+        // if (!this.exploting) {
+        //     //rotate ship
+        //     this.ship.angle += this.ship.rotation;
+
+        //     //move the ship
+        
+        //     this.ship.x += this.ship.thrust.x;
+        //     this.ship.y += this.ship.thrust.y;
+        // }
+
+
 
         // centre dot 
         this.ctx.fillStyle = "red";
@@ -3607,17 +3666,21 @@ class Display {
             }
         }
 
-        //check asteroid collision
-        for (let i = 0; i < this.asteroids.roids.length; i++) {
-            if (this.asteroids.distBeteenPoints(this.ship.x, this.ship.y, this.asteroids.roids[i].x, 
-                this.asteroids.roids[i].y) < this.ship.radius + this.asteroids.roids[i].radius) {
-                    this.exploting = true;
-                    this.exploat = 65;
-                    // this.explodeShip();
-                    this.endGame();
-                    // this.ship.drawShip();
-            }
-        }
+        // //check asteroid collision
+        // if (!this.exploting) {
+        //     for (let i = 0; i < this.asteroids.roids.length; i++) {
+        //         if (this.asteroids.distBeteenPoints(this.ship.x, this.ship.y, this.asteroids.roids[i].x, 
+        //             this.asteroids.roids[i].y) < this.ship.radius + this.asteroids.roids[i].radius) {
+        //                 this.exploting = true;
+        //                 this.exploat = 65;
+        //                 this.explodeShip();
+
+        //                 // this.endGame();
+
+        //                 // this.ship.drawShip();
+        //         }
+        //     }
+        
     }
 }
 
@@ -3703,7 +3766,7 @@ document.addEventListener("DOMContentLoaded", () => {
 __webpack_require__.r(__webpack_exports__);
 
 class Ship {
-    constructor (canvasHeight, canvasWidth, ctx) {
+    constructor(canvasHeight, canvasWidth, ctx, shipBlinkDuration, FPS, shipExplodeInvDuration) {
         this.canvasHeight = canvasHeight;
         this.canvasWidth = canvasWidth;
         this.shipSize = 30; // ship height in px
@@ -3718,7 +3781,12 @@ class Ship {
         this.turnSpeed = 150; //Turn speed in degrees per second (check 360 if need to)
         this.thrustX = 0;        
         this.thrustY = 0;    
-        // this.explodeTime = 0; 
+        this.explodeTime = 0;
+        this.shipBlinkDuration = shipBlinkDuration;
+        this.shipExplodeInvDuration = shipExplodeInvDuration;
+        this.FPS = FPS;
+        this.blinkNum = Math.ceil(shipExplodeInvDuration / shipBlinkDuration);
+        this.blinkTime = Math.ceil(shipBlinkDuration + this.FPS);
         // this.shipExplodeDuration = 0.3; //Duration of the ship explosion
 
         this.thrust = {
