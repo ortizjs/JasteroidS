@@ -51,13 +51,7 @@ class Display {
         };
         end();
     }
-
-    // endGame(){
-    //     const end = () => {
-    //         this.frame.cancelAnimationFrame(end);
-    //     };
-    // }
-
+    
     keyDown(event) {
         switch (event.keyCode) {
             case 37: // left arrow down = rotation ship left
