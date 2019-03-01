@@ -20,8 +20,9 @@ class Ship {
         this.explodeTime = 0;
         this.canShoot = true;
         this.lasers = [];
-        this.laserMax = 100; // Max number of lasers on the sceen at once. 
+        this.laserMax = 10; // Max number of lasers on the sceen at once. 
         this.laserSpeed = 500; // Speed of laser in px per second.
+        this.laserDistance = 0.6; //
         // this.shipBlinkDuration = shipBlinkDuration;
         // this.shipExplodeInvDuration = shipExplodeInvDuration;
         // this.FPS = FPS;

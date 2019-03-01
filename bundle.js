@@ -3654,6 +3654,19 @@ class Display {
         for (let i = 0; i < this.ship.lasers.length; i++) {
             this.ship.lasers[i].x += this.ship.lasers[i].xv;
             this.ship.lasers[i].y += this.ship.lasers[i].yv;
+
+
+            //Handling the lasers going off the edge of the canvas
+            if (this.ship.lasers[i].x < 0) {
+                this.ship.lasers[i].x = this.canvasWidth;
+            } else if (this.ship.lasers[i].x > this.canvasWidth) {
+                this.ship.lasers[i].x = 0;
+            }
+            if (this.ship.lasers[i].y < 0) {
+                this.ship.lasers[i].y = this.canvasHeight;
+            } else if (this.ship.lasers[i].y > this.canvasHeight) {
+                this.ship.lasers[i].y = 0;
+            }
         }
 
         //handle edge of screen
@@ -3817,8 +3830,9 @@ class Ship {
         this.explodeTime = 0;
         this.canShoot = true;
         this.lasers = [];
-        this.laserMax = 100; // Max number of lasers on the sceen at once. 
+        this.laserMax = 10; // Max number of lasers on the sceen at once. 
         this.laserSpeed = 500; // Speed of laser in px per second.
+        this.laserDistance = 0.6; //
         // this.shipBlinkDuration = shipBlinkDuration;
         // this.shipExplodeInvDuration = shipExplodeInvDuration;
         // this.FPS = FPS;
