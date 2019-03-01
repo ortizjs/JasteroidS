@@ -39,6 +39,7 @@ class Display {
         const begin = () => {
             this.frame = requestAnimationFrame(begin);
             document.getElementById("gameOver-modal").style.display = "none";
+            document.getElementById("gameWon-modal").style.display = "none";
             this.renderItems({canwin:true});
         };
         begin();
