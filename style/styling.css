@@ -172,7 +172,7 @@ button{
     /* width: 100%; */
 }
 
-#gameOver-modal {
+.gameOver-modal {
     display: none;
     /* Hidden by default */
     position: fixed;
@@ -219,6 +219,56 @@ button{
     /* font-family: "ITC Serif Gothic", Lato; */
     font-size: 75px;
 }
+
+.gameWon-modal {
+    display: none;
+    /* Hidden by default */
+    position: static;
+    /* Stay in place */
+    z-index: 5;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    /* overflow: auto; */
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+.gameWon-inner {
+  /* background-color: transparent; */
+  /* background-color: #fefefe; */
+  background-color: rgb(247, 244, 244);
+  /* Fallback color */
+  background-color: rgba(56, 85, 128, 0.4);
+  /* Black w/ opacity */
+  margin: 5% auto; /* 5% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%; /* Could be more or less, depending on screen size */
+  /* Height: 100vh; */
+  /* Height: calc(100vh - 100px); */
+  height: 50%;
+}
+
+.game-won-label {
+    color: rgb(183, 208, 23);
+    font-family: 'Star Jedi', arial;
+    text-transform: uppercase;
+    text-shadow: 4px 4px 8px rgb(20, 133, 220);
+    text-align: center;
+    /* color: red; */
+    /* font-family: "ITC Serif Gothic", Lato; */
+    font-size: 75px;
+}
+
+
 
 .re-start-button-div {
     /* display: flex; */

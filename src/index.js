@@ -28,6 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (event.target.classList.contains("start")){
             game = new Display(canvasWidth, canvasHeight, ctx, spaceShipSound);
             game.startGame();
+            document.querySelector("#game-canvas").focus();
             // gameSound.play();
             // spaceShipSound.play();
 

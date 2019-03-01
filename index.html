@@ -37,13 +37,14 @@
                             <p>
                                 2 - Navigate the ship's direction by using 
                                 the Right and Left keys. 
-                                
                             </p>
                             <p>
                                 3 - Thrust the ship by pressing the Up key.
-                                
                             </p>
-                                4 - Stay alive by navigating away from the asteroids.
+                            <p>
+                                4 - Shoot lasers by pressing the spacebar.
+                            </p>
+                                5 - Stay alive by navigating away from the asteroids and/or destroying with laser strike.
                             </p>
                             </p>
                                 ** If you would like to play again please click restart! **
@@ -68,27 +69,32 @@
                 </div>
 
                 <div class="canvas-div">
-                    <canvas id="game-canvas" width="900" height="700"></canvas>
+                    <canvas tabindex="0" id="game-canvas" width="900" height="700"></canvas>
                 </div>
-
-                
             </div>
             <div id="gameOver-modal" class="gameOver-modal">
                 <div class="gameOver-inner">
-
-                    <!-- <label class="game-over-label" for="gameOver">
-                        Gave Over!
-                    </label> -->
                     <h2 class="game-over-label">
                         Gave Over!
                     </h2>
-                    <div class="re-start-button-div" id="restartbuttondiv">
+                    <div class="re-start-button-div" id="restartbutton1">
                         <button class="start" >Restart</button>
                     </div>
 
                 </div>
             </div>
-            
+    
+            <div id="gameWon-modal" class="gameWon-modal">
+                <div class="gameWon-inner">
+                    <h2 class="game-won-label">
+                        Congrats, you WON!👏🏼🙌🏼🎉🎊
+                    </h2>
+                    <div class="re-start-button-div" id="restartbuttond2">
+                        <button class="start" >Restart</button>
+                    </div>
+
+                </div>
+            </div>
         </div>
     <script src="./bundle.js"></script>
     <!-- <script src="./main.js"></script> -->

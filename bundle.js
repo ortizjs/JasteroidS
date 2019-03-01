@@ -3286,7 +3286,7 @@ class Asteroids {
         this.ship = ship;
         this.x;
         this.y;
-        this.roidsNum = 20; // starting number of asteroids 
+        this.roidsNum = 1; // starting number of asteroids 
         this.roids = [];
         this.roidsVertex = 10; // average number of vertices on each asteroid
         this.roidJag = 0.6; //jaggerness of the asteroids (0 = none, 1 = lots)
@@ -3442,7 +3442,7 @@ class Display {
 
         document.addEventListener("keydown", this.keyDown);
         document.addEventListener("keyup", this.keyUp);
-        this.renderItems();
+        this.renderItems({canwin: false});
         this.asteroids.createAsteroidsBelt();
     }
     
@@ -3450,18 +3450,30 @@ class Display {
         const begin = () => {
             this.frame = requestAnimationFrame(begin);
             document.getElementById("gameOver-modal").style.display = "none";
-            this.renderItems();
+            this.renderItems({canwin:true});
         };
         begin();
     }
 
     endGame(){
         const end = () => {
-            window.cancelAnimationFrame(end);
+            console.log("Debugger");
+            // debugger;
+            window.cancelAnimationFrame(this.frame);
             document.getElementById("gameOver-modal").style.display = "block";
         };
         end();
     }
+
+    wonGame(){
+        const won = () => {
+            // debugger;
+            window.cancelAnimationFrame(this.frame);
+            document.getElementById("gameWon-modal").style.display = "block";
+        };
+        won();
+    }
+
 
     shootLaser() {
         // create the laser object
@@ -3519,11 +3531,11 @@ class Display {
     // console.log(this.exploting, this.shipExplodeTime);
     
         // this.ship.drawExplotion();
-        console.log(this.exploat === 65);
-        console.log("Exploded");
+        // console.log(this.exploat === 65);
+        // console.log("Exploded");
         if (this.exploat === 65) {
-            console.log(this.ship.x, this.ship.y);
-            this.endGame();
+            // console.log(this.ship.x, this.ship.y);
+            // this.wonGame();
             // return;
             // this.cancelAnimationFrame(this.frame);
         }
@@ -3537,7 +3549,7 @@ class Display {
     // }
 
 
-    renderItems() {
+    renderItems({canwin}) {
         //Boolean for whether the ship is exploding.
         // let blinkOn = this.ship.blinkNum % 2 == 0;
         // let exploding = this.ship.explodeTime > 0;
@@ -3678,9 +3690,15 @@ class Display {
             }
         }
 
+        // Detect when game won
+        if (this.asteroids.roids.length === 0 && canwin){
+            // console.log("Won");
+            this.wonGame();
+        }
+
         // Move/logic lasers
         for (let i = this.ship.lasers.length - 1; i >= 0; i--) {
-            console.log(this.ship.lasers);
+            // console.log(this.ship.lasers);
 
             //calculate the distance traveled
             this.ship.lasers[i].distance += Math.sqrt(Math.pow(this.ship.lasers[i].xv, 2) + Math.pow(this.ship.lasers[i].yv, 2));
@@ -3815,6 +3833,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (event.target.classList.contains("start")){
             game = new _display__WEBPACK_IMPORTED_MODULE_0__["default"](canvasWidth, canvasHeight, ctx, spaceShipSound);
             game.startGame();
+            document.querySelector("#game-canvas").focus();
             // gameSound.play();
             // spaceShipSound.play();
 
