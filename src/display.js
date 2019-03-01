@@ -11,7 +11,6 @@ class Display {
         // this.shipExplodeDuration = 0.3; //Duration of the ship's explotation. 
         // this.shipExplodeInvDuration = 3; //Duration of the ship's invisibility in seconds. 
         // this.shipBlinkDuration = 0.1; //Duration of the ship's blink during invisibility in seconds. 
-        this.background = new Image();
         this.ship = new Ship(canvasWidth, canvasHeight, ctx);
         // this.ship = new Ship(canvasWidth, canvasHeight, ctx, this.shipBlinkDuration, this.FPS, this.shipExplodeInvDuration);
         this.keyDown = this.keyDown.bind(this);
@@ -21,8 +20,9 @@ class Display {
         this.asteroids = new Asteroids(canvasWidth, canvasHeight, this.FPS, ctx, this.ship.shipSize, this.ship);
         this.showBouding = false;
         // this.shipExplodeTime = 0;
-        this.background.src ="";
-        // this.background.src ="./imgs/gamebackground.jpg";
+        // this.background.src ="";
+        this.background = new Image();
+        this.background.src ="./imgs/gamebackground.jpg";
         this.exploting = false;
         this.exploat = 0;
         this.frame;
@@ -94,9 +94,9 @@ class Display {
         }
     }
 
-    newShip() {
-        return this.ship.drawShip();
-    }
+    // newShip() {
+    //     return this.ship.drawShip();
+    // }
 
 
     renderItems() {
@@ -117,9 +117,9 @@ class Display {
 
         if (!this.exploting) {
             // console.log("NLINK ON:", this.ship.blinkNum);
-        //     if (blinkOn) {
-                this.ship.drawShip();
-        //     }
+            //    if (blinkOn) {
+            this.ship.drawShip();
+            //    }
 
             // handle blinking 
             // if (this.ship.blinkNum > 0) {
@@ -144,17 +144,20 @@ class Display {
 
 
         // thrust the ship
-        if (this.ship.thrusting) {
-            this.spaceShipSound.play();
-            this.ship.thrust.x += this.ship.shipThrust * Math.cos(this.ship.angle) / this.FPS;
-            this.ship.thrust.y -= this.ship.shipThrust * Math.sin(this.ship.angle) / this.FPS;
-            if (!this.exploting){
-                this.ship.drawThrust();
+        if (!this.exploting) {
+            if (this.ship.thrusting) {
+                this.spaceShipSound.play();
+                this.ship.thrust.x += this.ship.shipThrust * Math.cos(this.ship.angle) / this.FPS;
+                this.ship.thrust.y -= this.ship.shipThrust * Math.sin(this.ship.angle) / this.FPS;
+                // if (!this.exploting){
+                    this.ship.drawThrust();
+                // }
+    
+            } else {
+                // this.spaceShipSound.stop();
+                this.ship.thrust.x -= this.friction * this.ship.thrust.x / this.FPS;
+                this.ship.thrust.y -= this.friction * this.ship.thrust.y / this.FPS;
             }
-
-        } else {
-            this.ship.thrust.x -= this.friction * this.ship.thrust.x / this.FPS;
-            this.ship.thrust.y -= this.friction * this.ship.thrust.y / this.FPS;
         }
 
         //check asteroid collision
@@ -176,14 +179,15 @@ class Display {
 
             this.ship.x += this.ship.thrust.x;
             this.ship.y += this.ship.thrust.y;
-        } else {
-            // this.ship.explodeTime--;
-            if (this.ship.explodeTime == 0) {
-                this.exploting = false;
-                // this.newShip();
-                this.ship.drawShip();
-            } 
-        }
+        } 
+        // else {
+        //     // this.ship.explodeTime--;
+        //     if (this.ship.explodeTime == 0) {
+        //         this.exploting = false;
+        //         // this.newShip();
+        //         // this.ship.drawShip();
+        //     } 
+        // }
     // }
 
 
