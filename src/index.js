@@ -22,17 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let game;
     let gameRestart = new Display(canvasWidth, canvasHeight, ctx, spaceShipSound);
 
-    // document.querySelector("button").addEventListener("click", () => {
-    //     game.startGame();
-    //     // gameSound.play();
-    //     // spaceShipSound.play();
-    // });
-
-    // let background = new Image();
-    // background.src = "https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/BhBjRHe1Mj9qufshq/videoblocks-video-4k-animation-shinny-blue-stars-slowly-movement-in-black-galaxy-space-background-at-night_rlkmgjykg_thumbnail-full01.png";
-    // // background.src = "./images/dark-sky.jpg";
-    // this.ctx.drawImage(background, 0, 0, canv.width, canv.height);
-
 
 
     document.addEventListener("click", (event) => {

@@ -22,7 +22,7 @@ class Ship {
         this.lasers = [];
         this.laserMax = 10; // Max number of lasers on the sceen at once. 
         this.laserSpeed = 500; // Speed of laser in px per second.
-        this.laserDistance = 0.6; //
+        this.laserDistance = 0.6; // Max distance laser can travel as fraction of the screen width.
         // this.shipBlinkDuration = shipBlinkDuration;
         // this.shipExplodeInvDuration = shipExplodeInvDuration;
         // this.FPS = FPS;
@@ -89,18 +89,19 @@ class Ship {
         this.ctx.fill();
     }
 
-    shootLaser() {
-        // create the laser object
-        if (this.canShoot && this.lasers.length < this.laserMax) {
-            this.lasers.push({
-                //from the nose of the ship
-                x: this.x + 4 / 3 * this.radius * Math.cos(this.angle),
-                y: this.y - 4 / 3 * this.radius * Math.sin(this.angle),
-                xv: this.laserSpeed * Math.cos(this.angle) / this.FPS,
-                yv: -this.laserSpeed * Math.sin(this.angle) / this.FPS // negative as negative is upwards
-            });
-        }
-    }
+    // shootLaser() {
+    //     // create the laser object
+    //     if (this.canShoot && this.lasers.length < this.laserMax) {
+    //         this.lasers.push({
+    //             //from the nose of the ship
+    //             x: this.x + 4 / 3 * this.radius * Math.cos(this.angle),
+    //             y: this.y - 4 / 3 * this.radius * Math.sin(this.angle),
+    //             xv: this.laserSpeed * Math.cos(this.angle) / this.FPS,
+    //             yv: -this.laserSpeed * Math.sin(this.angle) / this.FPS, // negative as negative is upwards
+    //             distance: 0
+    //         });
+    //     }
+    // }
 
     drawThrust() {
         //Draw the thruster

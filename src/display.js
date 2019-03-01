@@ -52,24 +52,25 @@ class Display {
         end();
     }
 
-    // shootLaser() {
-    //     // create the laser object
-    //     if (this.ship.canShoot && this.ship.lasers.length < this.laserMax) {
-    //         this.ship.lasers.push({
-    //             //from the nose of the ship
-    //             x: this.ship.x + 4 / 3 * this.ship.radius * Math.cos(this.ship.angle),
-    //             y: this.ship.y - 4 / 3 * this.ship.radius * Math.sin(this.ship.angle),
-    //             xv: this.laserSpeed * Math.cos(this.ship.angle) / this.FPS,
-    //             yv: this.laserSpeed * Math.sin(this.ship.angle) / this.FPS
-    //         });
-    //     }
-    // }
+    shootLaser() {
+        // create the laser object
+        if (this.ship.canShoot && this.ship.lasers.length < this.ship.laserMax) {
+            this.ship.lasers.push({
+                //from the nose of the ship
+                x: this.ship.x + 4 / 3 * this.ship.radius * Math.cos(this.ship.angle),
+                y: this.ship.y - 4 / 3 * this.ship.radius * Math.sin(this.ship.angle),
+                xv: this.ship.laserSpeed * Math.cos(this.ship.angle) / this.FPS,
+                yv: -this.ship.laserSpeed * Math.sin(this.ship.angle) / this.FPS,
+                distance: 0
+            });
+        }
+    }
     
     keyDown(event) {
         switch (event.keyCode) {
             case 32: //spacebar down = shoot the laser
                 // console.log("spacebar up");
-                this.ship.shootLaser();
+                this.shootLaser();
                 break;
             case 37: // left arrow down = rotation ship left
                 this.ship.rotation = this.ship.turnSpeed / 180 * Math.PI / this.FPS;
@@ -183,6 +184,14 @@ class Display {
             }
         }
 
+
+        // centre dot for the ship
+        this.ctx.fillStyle = "red";
+        // console.log("this.ship.x @ display", this.ship.x);
+        this.ctx.fillRect(this.ship.x - 1, this.ship.y - 1, 2, 2);
+
+       
+
         //check asteroid collision
         if (!this.exploting) {
             for (let i = 0; i < this.asteroids.roids.length; i++) {
@@ -211,7 +220,7 @@ class Display {
         //         // this.ship.drawShip();
         //     } 
         // }
-    // }
+     // }
 
 
         // if (!this.exploting) {
@@ -223,24 +232,56 @@ class Display {
         //     this.ship.x += this.ship.thrust.x;
         //     this.ship.y += this.ship.thrust.y;
         // }
-
-
-
-        // centre dot for the ship
-        this.ctx.fillStyle = "red";
-        // console.log("this.ship.x @ display", this.ship.x);
-        this.ctx.fillRect(this.ship.x - 1, this.ship.y - 1, 2, 2);
-
+   
         //Draw the lasers 
         for (let i = 0; i < this.ship.lasers.length; i++) {
             this.ctx.fillStyle = "salmon";
             this.ctx.beginPath();
-            this.ctx.arc(this.ship.lasers[i].x, this.ship.lasers[i].y, this.ship.shipSize / 15, 0, Math.PI * 2, false); 
+            this.ctx.arc(this.ship.lasers[i].x, this.ship.lasers[i].y, this.ship.shipSize / 15, 0, Math.PI * 2, false);
             this.ctx.fill();
-        } 
+        }
 
-        // Move the lasers
-        for (let i = 0; i < this.ship.lasers.length; i++) {
+        //Detect when the laser hits on asteroids 
+        let asteroidX, asteroidY, asteroidR, laserX, laserY;
+        for (let i = this.asteroids.roids.length - 1; i >= 0; i--){
+            //Grab the asteroids properties
+            asteroidX = this.asteroids.roids[i].x;
+            asteroidY = this.asteroids.roids[i].y;
+            asteroidR = this.asteroids.roids[i].radius;
+
+            //loop over the lasers 
+            for (let j = this.ship.lasers.length - 1; j >= 0; j--){
+                //grab the lasers properties 
+                laserX = this.ship.lasers[j].x;
+                laserY = this.ship.lasers[j].y;
+
+                //detect the actual hits: 
+                // if the distance between the asteroid and the laser is less than asteroid radius the it is considered a hit.
+                if (this.asteroids.distBeteenPoints(asteroidX, asteroidY, laserX, laserY) < asteroidR){
+                    //remove the laser
+                    this.ship.lasers.splice(j, 1);
+                    //remove the asteroid
+                    this.asteroids.roids.splice(i, 1);
+                    break;
+                }
+            }
+        }
+
+        // Move/logic lasers
+        for (let i = this.ship.lasers.length - 1; i >= 0; i--) {
+            console.log(this.ship.lasers);
+
+            //calculate the distance traveled
+            this.ship.lasers[i].distance += Math.sqrt(Math.pow(this.ship.lasers[i].xv, 2) + Math.pow(this.ship.lasers[i].yv, 2));
+
+            // check the distance travelled
+            if (this.ship.lasers[i].distance > this.ship.laserDistance * this.canvasWidth) {
+                this.ship.lasers.splice(i, 1);
+                continue;
+            }
+
+
+            //moving the lasers 
             this.ship.lasers[i].x += this.ship.lasers[i].xv;
             this.ship.lasers[i].y += this.ship.lasers[i].yv;
 
