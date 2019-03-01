@@ -3448,10 +3448,7 @@ class Display {
         const begin = () => {
             this.frame = requestAnimationFrame(begin);
             document.getElementById("gameOver-modal").style.display = "none";
-            // debugger
             this.renderItems();
-            // this.asteroids.createAsteroidsBelt();
-            // this.asteroids.moveAsteroids();
         };
         begin();
     }
@@ -3502,7 +3499,7 @@ class Display {
         console.log("Exploded");
         if (this.exploat === 65) {
             console.log(this.ship.x, this.ship.y);
-            // this.endGame();
+            this.endGame();
             // return;
             // this.cancelAnimationFrame(this.frame);
         }
