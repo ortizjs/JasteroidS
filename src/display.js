@@ -184,6 +184,7 @@ class Display {
                 this.ship.drawShip();
             } 
         }
+    }
 
 
         // if (!this.exploting) {
