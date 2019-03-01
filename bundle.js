@@ -3551,7 +3551,6 @@ class Display {
         }
 
         //draw the player ship or explotion
-
         if (!this.exploting) {
             // console.log("NLINK ON:", this.ship.blinkNum);
             //    if (blinkOn) {
@@ -3575,8 +3574,6 @@ class Display {
             this.ship.drawExplotion();
             this.endGame();
             // this.exploting = false;
-            // setTimeout(this.alertAndReload(), 2000);
-            // setTimeout(document.getElementById(""));
         }
 
 
@@ -3652,6 +3649,12 @@ class Display {
             this.ctx.arc(this.ship.lasers[i].x, this.ship.lasers[i].y, this.ship.shipSize / 15, 0, Math.PI * 2, false); 
             this.ctx.fill();
         } 
+
+        // Move the lasers
+        for (let i = 0; i < this.ship.lasers.length; i++) {
+            this.ship.lasers[i].x += this.ship.lasers[i].xv;
+            this.ship.lasers[i].y += this.ship.lasers[i].yv;
+        }
 
         //handle edge of screen
         if (this.ship.x < 0 - this.ship.radius) {
@@ -3814,7 +3817,7 @@ class Ship {
         this.explodeTime = 0;
         this.canShoot = true;
         this.lasers = [];
-        this.laserMax = 10; // Max number of lasers on the sceen at once. 
+        this.laserMax = 100; // Max number of lasers on the sceen at once. 
         this.laserSpeed = 500; // Speed of laser in px per second.
         // this.shipBlinkDuration = shipBlinkDuration;
         // this.shipExplodeInvDuration = shipExplodeInvDuration;
@@ -3890,7 +3893,7 @@ class Ship {
                 x: this.x + 4 / 3 * this.radius * Math.cos(this.angle),
                 y: this.y - 4 / 3 * this.radius * Math.sin(this.angle),
                 xv: this.laserSpeed * Math.cos(this.angle) / this.FPS,
-                yv: this.laserSpeed * Math.sin(this.angle) / this.FPS
+                yv: -this.laserSpeed * Math.sin(this.angle) / this.FPS // negative as negative is upwards
             });
         }
     }

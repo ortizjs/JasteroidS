@@ -20,7 +20,7 @@ class Ship {
         this.explodeTime = 0;
         this.canShoot = true;
         this.lasers = [];
-        this.laserMax = 10; // Max number of lasers on the sceen at once. 
+        this.laserMax = 100; // Max number of lasers on the sceen at once. 
         this.laserSpeed = 500; // Speed of laser in px per second.
         // this.shipBlinkDuration = shipBlinkDuration;
         // this.shipExplodeInvDuration = shipExplodeInvDuration;
@@ -96,7 +96,7 @@ class Ship {
                 x: this.x + 4 / 3 * this.radius * Math.cos(this.angle),
                 y: this.y - 4 / 3 * this.radius * Math.sin(this.angle),
                 xv: this.laserSpeed * Math.cos(this.angle) / this.FPS,
-                yv: this.laserSpeed * Math.sin(this.angle) / this.FPS
+                yv: -this.laserSpeed * Math.sin(this.angle) / this.FPS // negative as negative is upwards
             });
         }
     }
