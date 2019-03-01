@@ -101,8 +101,8 @@ class Display {
 
     renderItems() {
         //Boolean for whether the ship is exploding.
-        let blinkOn = this.ship.blinkNum % 2 == 0;
-        let exploding = this.ship.explodeTime > 0;
+        // let blinkOn = this.ship.blinkNum % 2 == 0;
+        // let exploding = this.ship.explodeTime > 0;
 
         //create background/canvas
 
@@ -116,20 +116,20 @@ class Display {
         //draw the player ship or explotion
 
         if (!this.exploting) {
-        //     console.log("NLINK ON:", this.ship.blinkNum);
+            console.log("NLINK ON:", this.ship.blinkNum);
         //     if (blinkOn) {
                 this.ship.drawShip();
         //     }
 
             // handle blinking 
-            // if (this.ship.blinkNum > 0) {
+            if (this.ship.blinkNum > 0) {
             //     // reduce the blink time
             //     this.ship.blinkTime--;
 
             //     //reduce the blink num
             //     if (this.ship.blinkTime == 0) {
             //         this.ship.blinkTime = Math.ceil(this.ship.shipBlinkDuration * this.FPS);
-            //         this.ship.blinkNum--;
+                    this.ship.blinkNum--;
             //     }
             // }
             
