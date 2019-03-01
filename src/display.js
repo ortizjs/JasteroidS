@@ -21,8 +21,8 @@ class Display {
         this.asteroids = new Asteroids(canvasWidth, canvasHeight, this.FPS, ctx, this.ship.shipSize, this.ship);
         this.showBouding = false;
         // this.shipExplodeTime = 0;
-        // this.background.src ="";
-        this.background.src ="./imgs/gamebackground.jpg";
+        this.background.src ="";
+        // this.background.src ="./imgs/gamebackground.jpg";
         this.exploting = false;
         this.exploat = 0;
         this.frame;
