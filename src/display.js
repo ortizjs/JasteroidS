@@ -22,7 +22,7 @@ class Display {
         // this.shipExplodeTime = 0;
         // this.background.src ="";
         this.background = new Image();
-        this.background.src ="./imgs/gamebackground.jpg";
+        this.background.src ="../imgs/gamebackground.jpg";
         this.exploting = false;
         this.exploat = 0;
         this.frame;

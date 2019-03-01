@@ -3433,7 +3433,7 @@ class Display {
         // this.shipExplodeTime = 0;
         // this.background.src ="";
         this.background = new Image();
-        this.background.src ="./imgs/gamebackground.jpg";
+        this.background.src ="../imgs/gamebackground.jpg";
         this.exploting = false;
         this.exploat = 0;
         this.frame;
@@ -3712,8 +3712,8 @@ document.addEventListener("DOMContentLoaded", () => {
         src: ["/src/spaceship_sound.mp3"]
     });
 
-    // let game = new Display(canvasWidth, canvasHeight, ctx, spaceShipSound);
-    let game;
+    let game = new _display__WEBPACK_IMPORTED_MODULE_0__["default"](canvasWidth, canvasHeight, ctx, spaceShipSound);
+    // let game;
     let gameRestart = new _display__WEBPACK_IMPORTED_MODULE_0__["default"](canvasWidth, canvasHeight, ctx, spaceShipSound);
 
     // document.querySelector("button").addEventListener("click", () => {
@@ -3731,7 +3731,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.addEventListener("click", (event) => {
         if (event.target.classList.contains("start")){
-            game = new _display__WEBPACK_IMPORTED_MODULE_0__["default"](canvasWidth, canvasHeight, ctx, spaceShipSound);
+            // game = new Display(canvasWidth, canvasHeight, ctx, spaceShipSound);
             game.startGame();
             // gameSound.play();
             // spaceShipSound.play();

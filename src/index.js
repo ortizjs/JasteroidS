@@ -18,8 +18,8 @@ document.addEventListener("DOMContentLoaded", () => {
         src: ["/src/spaceship_sound.mp3"]
     });
 
-    // let game = new Display(canvasWidth, canvasHeight, ctx, spaceShipSound);
-    let game;
+    let game = new Display(canvasWidth, canvasHeight, ctx, spaceShipSound);
+    // let game;
     let gameRestart = new Display(canvasWidth, canvasHeight, ctx, spaceShipSound);
 
     // document.querySelector("button").addEventListener("click", () => {
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.addEventListener("click", (event) => {
         if (event.target.classList.contains("start")){
-            game = new Display(canvasWidth, canvasHeight, ctx, spaceShipSound);
+            // game = new Display(canvasWidth, canvasHeight, ctx, spaceShipSound);
             game.startGame();
             // gameSound.play();
             // spaceShipSound.play();
