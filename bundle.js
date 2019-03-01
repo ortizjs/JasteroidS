@@ -3437,6 +3437,8 @@ class Display {
         this.exploting = false;
         this.exploat = 0;
         this.frame;
+        // this.laserMax = 10; // Max number of lasers on the sceen at once. 
+        // this.laserSpeed = 500; // Speed of laser in px per second.
 
         document.addEventListener("keydown", this.keyDown);
         document.addEventListener("keyup", this.keyUp);
@@ -3460,9 +3462,26 @@ class Display {
         };
         end();
     }
+
+    // shootLaser() {
+    //     // create the laser object
+    //     if (this.ship.canShoot && this.ship.lasers.length < this.laserMax) {
+    //         this.ship.lasers.push({
+    //             //from the nose of the ship
+    //             x: this.ship.x + 4 / 3 * this.ship.radius * Math.cos(this.ship.angle),
+    //             y: this.ship.y - 4 / 3 * this.ship.radius * Math.sin(this.ship.angle),
+    //             xv: this.laserSpeed * Math.cos(this.ship.angle) / this.FPS,
+    //             yv: this.laserSpeed * Math.sin(this.ship.angle) / this.FPS
+    //         });
+    //     }
+    // }
     
     keyDown(event) {
         switch (event.keyCode) {
+            case 32: //spacebar down = shoot the laser
+                // console.log("spacebar up");
+                this.ship.shootLaser();
+                break;
             case 37: // left arrow down = rotation ship left
                 this.ship.rotation = this.ship.turnSpeed / 180 * Math.PI / this.FPS;
                 break;
@@ -3477,6 +3496,10 @@ class Display {
 
     keyUp(event) {
         switch (event.keyCode) {
+            case 32: //spacebar up = allow shooting again.
+                // console.log("spacebar up");
+                this.ship.canShoot = true;
+                break;
             case 37: // left arrow up = stop rotating ship left
                 this.ship.rotation = 0;
                 break;
@@ -3504,6 +3527,9 @@ class Display {
             // this.cancelAnimationFrame(this.frame);
         }
     }
+    
+
+    
 
     // newShip() {
     //     return this.ship.drawShip();
@@ -3614,10 +3640,18 @@ class Display {
 
 
 
-        // centre dot 
+        // centre dot for the ship
         this.ctx.fillStyle = "red";
         // console.log("this.ship.x @ display", this.ship.x);
         this.ctx.fillRect(this.ship.x - 1, this.ship.y - 1, 2, 2);
+
+        //Draw the lasers 
+        for (let i = 0; i < this.ship.lasers.length; i++) {
+            this.ctx.fillStyle = "salmon";
+            this.ctx.beginPath();
+            this.ctx.arc(this.ship.lasers[i].x, this.ship.lasers[i].y, this.ship.shipSize / 15, 0, Math.PI * 2, false); 
+            this.ctx.fill();
+        } 
 
         //handle edge of screen
         if (this.ship.x < 0 - this.ship.radius) {
@@ -3672,6 +3706,8 @@ class Display {
         //                 // this.ship.drawShip();
         //         }
         //     }
+
+
         
     }
 }
@@ -3712,8 +3748,8 @@ document.addEventListener("DOMContentLoaded", () => {
         src: ["/src/spaceship_sound.mp3"]
     });
 
-    let game = new _display__WEBPACK_IMPORTED_MODULE_0__["default"](canvasWidth, canvasHeight, ctx, spaceShipSound);
-    // let game;
+    // let game = new Display(canvasWidth, canvasHeight, ctx, spaceShipSound);
+    let game;
     let gameRestart = new _display__WEBPACK_IMPORTED_MODULE_0__["default"](canvasWidth, canvasHeight, ctx, spaceShipSound);
 
     // document.querySelector("button").addEventListener("click", () => {
@@ -3731,7 +3767,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.addEventListener("click", (event) => {
         if (event.target.classList.contains("start")){
-            // game = new Display(canvasWidth, canvasHeight, ctx, spaceShipSound);
+            game = new _display__WEBPACK_IMPORTED_MODULE_0__["default"](canvasWidth, canvasHeight, ctx, spaceShipSound);
             game.startGame();
             // gameSound.play();
             // spaceShipSound.play();
@@ -3760,6 +3796,7 @@ __webpack_require__.r(__webpack_exports__);
 class Ship {
     // constructor(canvasHeight, canvasWidth, ctx, shipBlinkDuration, FPS, shipExplodeInvDuration) {
     constructor(canvasHeight, canvasWidth, ctx) {
+        this.FPS = 30;
         this.canvasHeight = canvasHeight;
         this.canvasWidth = canvasWidth;
         this.shipSize = 30; // ship height in px
@@ -3775,6 +3812,10 @@ class Ship {
         this.thrustX = 0;        
         this.thrustY = 0;    
         this.explodeTime = 0;
+        this.canShoot = true;
+        this.lasers = [];
+        this.laserMax = 10; // Max number of lasers on the sceen at once. 
+        this.laserSpeed = 500; // Speed of laser in px per second.
         // this.shipBlinkDuration = shipBlinkDuration;
         // this.shipExplodeInvDuration = shipExplodeInvDuration;
         // this.FPS = FPS;
@@ -3839,6 +3880,19 @@ class Ship {
         this.ctx.beginPath();
         this.ctx.arc(this.x, this.y, this.radius * 0.5, 0, Math.PI * 2, false);
         this.ctx.fill();
+    }
+
+    shootLaser() {
+        // create the laser object
+        if (this.canShoot && this.lasers.length < this.laserMax) {
+            this.lasers.push({
+                //from the nose of the ship
+                x: this.x + 4 / 3 * this.radius * Math.cos(this.angle),
+                y: this.y - 4 / 3 * this.radius * Math.sin(this.angle),
+                xv: this.laserSpeed * Math.cos(this.angle) / this.FPS,
+                yv: this.laserSpeed * Math.sin(this.angle) / this.FPS
+            });
+        }
     }
 
     drawThrust() {

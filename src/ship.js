@@ -2,6 +2,7 @@
 class Ship {
     // constructor(canvasHeight, canvasWidth, ctx, shipBlinkDuration, FPS, shipExplodeInvDuration) {
     constructor(canvasHeight, canvasWidth, ctx) {
+        this.FPS = 30;
         this.canvasHeight = canvasHeight;
         this.canvasWidth = canvasWidth;
         this.shipSize = 30; // ship height in px
@@ -17,6 +18,10 @@ class Ship {
         this.thrustX = 0;        
         this.thrustY = 0;    
         this.explodeTime = 0;
+        this.canShoot = true;
+        this.lasers = [];
+        this.laserMax = 10; // Max number of lasers on the sceen at once. 
+        this.laserSpeed = 500; // Speed of laser in px per second.
         // this.shipBlinkDuration = shipBlinkDuration;
         // this.shipExplodeInvDuration = shipExplodeInvDuration;
         // this.FPS = FPS;
@@ -81,6 +86,19 @@ class Ship {
         this.ctx.beginPath();
         this.ctx.arc(this.x, this.y, this.radius * 0.5, 0, Math.PI * 2, false);
         this.ctx.fill();
+    }
+
+    shootLaser() {
+        // create the laser object
+        if (this.canShoot && this.lasers.length < this.laserMax) {
+            this.lasers.push({
+                //from the nose of the ship
+                x: this.x + 4 / 3 * this.radius * Math.cos(this.angle),
+                y: this.y - 4 / 3 * this.radius * Math.sin(this.angle),
+                xv: this.laserSpeed * Math.cos(this.angle) / this.FPS,
+                yv: this.laserSpeed * Math.sin(this.angle) / this.FPS
+            });
+        }
     }
 
     drawThrust() {
