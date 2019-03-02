@@ -24,7 +24,6 @@ document.addEventListener("DOMContentLoaded", () => {
         src: ["/src/Gun+Luger.mp3"]
     });
 
-    // let game = new Display(canvasWidth, canvasHeight, ctx, spaceShipSound);
     let game;
     let gameRestart = new Display(canvasWidth, canvasHeight, ctx, gameSound, spaceShipSound, explosionSound, shootingSound);
 
@@ -35,9 +34,6 @@ document.addEventListener("DOMContentLoaded", () => {
             game = new Display(canvasWidth, canvasHeight, ctx, gameSound, spaceShipSound, explosionSound, shootingSound);
             game.startGame();
             document.querySelector("#game-canvas").focus();
-            // gameSound.play();
-            // spaceShipSound.play();
-
         }
     });
 

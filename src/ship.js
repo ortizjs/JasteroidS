@@ -1,6 +1,5 @@
 
 class Ship {
-    // constructor(canvasHeight, canvasWidth, ctx, shipBlinkDuration, FPS, shipExplodeInvDuration) {
     constructor(canvasHeight, canvasWidth, ctx) {
         this.FPS = 30;
         this.canvasHeight = canvasHeight;
@@ -23,13 +22,6 @@ class Ship {
         this.laserMax = 10; // Max number of lasers on the sceen at once. 
         this.laserSpeed = 500; // Speed of laser in px per second.
         this.laserDistance = 0.6; // Max distance laser can travel as fraction of the screen width.
-        // this.shipBlinkDuration = shipBlinkDuration;
-        // this.shipExplodeInvDuration = shipExplodeInvDuration;
-        // this.FPS = FPS;
-        // this.blinkNum = Math.ceil(shipExplodeInvDuration / shipBlinkDuration);
-        // this.blinkTime = Math.ceil(shipBlinkDuration + this.FPS);
-        // this.shipExplodeDuration = 0.3; //Duration of the ship explosion
-
         this.thrust = {
             x: 0,
             y: 0
@@ -89,23 +81,8 @@ class Ship {
         this.ctx.fill();
     }
 
-    // shootLaser() {
-    //     // create the laser object
-    //     if (this.canShoot && this.lasers.length < this.laserMax) {
-    //         this.lasers.push({
-    //             //from the nose of the ship
-    //             x: this.x + 4 / 3 * this.radius * Math.cos(this.angle),
-    //             y: this.y - 4 / 3 * this.radius * Math.sin(this.angle),
-    //             xv: this.laserSpeed * Math.cos(this.angle) / this.FPS,
-    //             yv: -this.laserSpeed * Math.sin(this.angle) / this.FPS, // negative as negative is upwards
-    //             distance: 0
-    //         });
-    //     }
-    // }
-
     drawThrust() {
         //Draw the thruster
-
         this.ctx.beginPath();
         this.ctx.fillStyle = "red";
         this.ctx.strokeStyle = "yellow";
@@ -129,18 +106,6 @@ class Ship {
         this.ctx.fill();
         this.ctx.stroke();
     }
-
-    // explodeShip() {
-    //     this.explodeTime = Math.ceil(this.shipExplodeDuration * this.FPS);
-    //     console.log(this.explodeTime);
-    //     // this.drawExplotion();
-    //     // this.ctx.fillStyle = "lime";
-    //     // this.ctx.strokeStyle = "lime";
-    //     // this.ctx.beginPath();
-    //     // this.ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-    //     // this.ctx.fill();
-    //     // this.ctx.stroke();
-    // }
 }
 
 export default Ship;

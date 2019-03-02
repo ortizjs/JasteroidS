@@ -1,6 +1,5 @@
 import Ship from "./ship";
 import Asteroids from "./asteroids";
-// import { Howl } from "howler";
 
 class Display {
     constructor(canvasWidth, canvasHeight, ctx, gameSound, spaceShipSound, explosionSound, shootingSound) {
@@ -10,28 +9,19 @@ class Display {
         this.gameSound = gameSound;
         this.spaceShipSound = spaceShipSound;
         this.explosionSound = explosionSound;
-        this.shootingSound = shootingSound;
-        // this.shipExplodeDuration = 0.3; //Duration of the ship's explotation. 
-        // this.shipExplodeInvDuration = 3; //Duration of the ship's invisibility in seconds. 
-        // this.shipBlinkDuration = 0.1; //Duration of the ship's blink during invisibility in seconds. 
+        this.shootingSound = shootingSound; 
         this.ship = new Ship(canvasWidth, canvasHeight, ctx);
-        // this.ship = new Ship(canvasWidth, canvasHeight, ctx, this.shipBlinkDuration, this.FPS, this.shipExplodeInvDuration);
         this.keyDown = this.keyDown.bind(this);
         this.keyUp = this.keyUp.bind(this);
         this.FPS = 30;  // frames per seconds
         this.friction = 0.95; //friction of spaceship (0 - 1)
         this.asteroids = new Asteroids(canvasWidth, canvasHeight, this.FPS, ctx, this.ship.shipSize, this.ship);
         this.showBouding = false;
-        // this.shipExplodeTime = 0;
-        // this.background.src ="";
         this.background = new Image();
         this.background.src ="./imgs/gamebackground.jpg";
         this.exploting = false;
         this.exploat = 0;
         this.frame;
-        // this.laserMax = 10; // Max number of lasers on the sceen at once. 
-        // this.laserSpeed = 500; // Speed of laser in px per second.
-
         document.addEventListener("keydown", this.keyDown);
         document.addEventListener("keyup", this.keyUp);
         this.renderItems({canwin: false});
@@ -41,7 +31,6 @@ class Display {
     startGame(){
         const begin = () => {
             this.frame = requestAnimationFrame(begin);
-            // this.gameSound.play();
             document.getElementById("gameOver-modal").style.display = "none";
             document.getElementById("gameWon-modal").style.display = "none";
             this.renderItems({canwin:true});
@@ -86,7 +75,6 @@ class Display {
     keyDown(event) {
         switch (event.keyCode) {
             case 32: //spacebar down = shoot the laser
-                // console.log("spacebar up");
                 this.shootLaser();
                 break;
             case 37: // left arrow down = rotation ship left
@@ -104,7 +92,6 @@ class Display {
     keyUp(event) {
         switch (event.keyCode) {
             case 32: //spacebar up = allow shooting again.
-                // console.log("spacebar up");
                 this.ship.canShoot = true;
                 break;
             case 37: // left arrow up = stop rotating ship left
@@ -119,37 +106,14 @@ class Display {
         }
     }
 
-    explodeShip() {
-        this.ship.explodeTime = Math.ceil(this.shipExplodeDuration * this.FPS);
-    //     this.exploting = this.shipExplodeTime > 0;
-    // console.log(this.exploting, this.shipExplodeTime);
-    
-        // this.ship.drawExplotion();
-        // console.log(this.exploat === 65);
-        // console.log("Exploded");
-        if (this.exploat === 65) {
-            // console.log(this.ship.x, this.ship.y);
-            // this.wonGame();
-            // return;
-            // this.cancelAnimationFrame(this.frame);
-        }
-    }
-    
-
-    
-
-    // newShip() {
-    //     return this.ship.drawShip();
+    // explodeShip() {
+    //     this.ship.explodeTime = Math.ceil(this.shipExplodeDuration * this.FPS);
+    //     if (this.exploat === 65) {
+    //     }
     // }
 
-
     renderItems({canwin}) {
-        //Boolean for whether the ship is exploding.
-        // let blinkOn = this.ship.blinkNum % 2 == 0;
-        // let exploding = this.ship.explodeTime > 0;
-
         //create background/canvas
-
         this.ctx.drawImage(this.background, 0, 0);
 
         //Collision bounding
@@ -159,28 +123,12 @@ class Display {
 
         //draw the player ship or explotion
         if (!this.exploting) {
-            // console.log("NLINK ON:", this.ship.blinkNum);
-            //    if (blinkOn) {
             this.ship.drawShip();
-            //    }
-
-            // handle blinking 
-            // if (this.ship.blinkNum > 0) {
-            //     // reduce the blink time
-            //     this.ship.blinkTime--;
-
-            //     //reduce the blink num
-            //     if (this.ship.blinkTime == 0) {
-            //         this.ship.blinkTime = Math.ceil(this.ship.shipBlinkDuration * this.FPS);
-                    // this.ship.blinkNum--;
-            //     }
-            // }
             
         } else {
             // draw the explotion
             this.ship.drawExplotion();
             this.endGame();
-            // this.exploting = false;
         }
 
 
@@ -190,10 +138,7 @@ class Display {
                 this.spaceShipSound.play();
                 this.ship.thrust.x += this.ship.shipThrust * Math.cos(this.ship.angle) / this.FPS;
                 this.ship.thrust.y -= this.ship.shipThrust * Math.sin(this.ship.angle) / this.FPS;
-                // if (!this.exploting){
                     this.ship.drawThrust();
-                // }
-    
             } else {
                 // this.spaceShipSound.stop();
                 this.ship.thrust.x -= this.friction * this.ship.thrust.x / this.FPS;
@@ -204,7 +149,6 @@ class Display {
 
         // centre dot for the ship
         this.ctx.fillStyle = "red";
-        // console.log("this.ship.x @ display", this.ship.x);
         this.ctx.fillRect(this.ship.x - 1, this.ship.y - 1, 2, 2);
 
        
@@ -216,9 +160,7 @@ class Display {
                     this.asteroids.roids[i].y) < this.ship.radius + this.asteroids.roids[i].radius) {
                     this.exploting = true;
                     this.exploat = 65;
-                    this.explodeShip();
-                    // this.endGame();
-                    // this.ship.drawShip();
+                    // this.explodeShip();
                 }
             }
             //rotate ship
@@ -229,27 +171,6 @@ class Display {
             this.ship.x += this.ship.thrust.x;
             this.ship.y += this.ship.thrust.y;
         } 
-        // else {
-        //     // this.ship.explodeTime--;
-        //     if (this.ship.explodeTime == 0) {
-        //         this.exploting = false;
-        //         // this.newShip();
-        //         // this.ship.drawShip();
-        //     } 
-        // }
-     // }
-
-
-        // if (!this.exploting) {
-        //     //rotate ship
-        //     this.ship.angle += this.ship.rotation;
-
-        //     //move the ship
-        
-        //     this.ship.x += this.ship.thrust.x;
-        //     this.ship.y += this.ship.thrust.y;
-        // }
-   
         //Draw the lasers 
         for (let i = 0; i < this.ship.lasers.length; i++) {
             this.ctx.fillStyle = "salmon";
@@ -287,13 +208,11 @@ class Display {
 
         // Detect when game won
         if (this.asteroids.roids.length === 0 && canwin){
-            // console.log("Won");
             this.wonGame();
         }
 
         // Move/logic lasers
         for (let i = this.ship.lasers.length - 1; i >= 0; i--) {
-            // console.log(this.ship.lasers);
 
             //calculate the distance traveled
             this.ship.lasers[i].distance += Math.sqrt(Math.pow(this.ship.lasers[i].xv, 2) + Math.pow(this.ship.lasers[i].yv, 2));

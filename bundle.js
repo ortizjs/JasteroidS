@@ -3291,8 +3291,6 @@ class Asteroids {
         this.roidsVertex = 10; // average number of vertices on each asteroid
         this.roidJag = 0.6; //jaggerness of the asteroids (0 = none, 1 = lots)
         this.showBouding = false; // Shows/hide the collision boudning of each element in development mode.
-        // this.createAsteroidsBelt = this.createAsteroidsBelt.bind(this);
-        // this.newAsteroid = this.newAsteroid.bind(this);
     }
 
     drawAsteroids() {
@@ -3335,27 +3333,6 @@ class Asteroids {
         }
 
     }
-    
-    //move the asteroids
-    // moveAsteroids() {
-    //     let x, y, radius, angle, vert, offs;
-    //     for (let i = 0; i < this.roids.length; i++) {
-    //         //move the asteroid 
-    //         this.roids[i].x += this.roids[i].xVelocity;
-    //         this.roids[i].y += this.roids[i].yVelocity;
-    //         //handle the edges of the screen
-    //         if (this.roids[i].x < 0 - this.roids[i].radius) {
-    //             this.roids[i].x = this.canvasWidth + this.roids[i].radius;
-    //         } else if (this.roids[i].x > this.canvasWidth + this.roids[i].radius) {
-    //             this.roids[i].x = 0 - this.roids[i].radius;
-    //         }
-    //         if (this.roids[i].y < 0 - this.roids[i].radius) {
-    //             this.roids[i].y = this.canvasWidth + this.roids[i].radius;
-    //         } else if (this.roids[i].y > this.canvasWidth + this.roids[i].radius) {
-    //             this.roids[i].y = 0 - this.roids[i].radius;
-    //         }
-    //     }
-    // }
 
     createAsteroidsBelt() {
         this.roids = [];
@@ -3387,7 +3364,6 @@ class Asteroids {
         for (let i = 0; i < roid.vert; i++) {
             roid.offs.push(Math.random() * this.roidJag * 2 + 1 - this.roidJag);
         }
-        // console.log(roid);
         return roid;
     }
 
@@ -3411,7 +3387,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _asteroids__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./asteroids */ "./src/asteroids.js");
 
 
-// import { Howl } from "howler";
 
 class Display {
     constructor(canvasWidth, canvasHeight, ctx, gameSound, spaceShipSound, explosionSound, shootingSound) {
@@ -3421,28 +3396,19 @@ class Display {
         this.gameSound = gameSound;
         this.spaceShipSound = spaceShipSound;
         this.explosionSound = explosionSound;
-        this.shootingSound = shootingSound;
-        // this.shipExplodeDuration = 0.3; //Duration of the ship's explotation. 
-        // this.shipExplodeInvDuration = 3; //Duration of the ship's invisibility in seconds. 
-        // this.shipBlinkDuration = 0.1; //Duration of the ship's blink during invisibility in seconds. 
+        this.shootingSound = shootingSound; 
         this.ship = new _ship__WEBPACK_IMPORTED_MODULE_0__["default"](canvasWidth, canvasHeight, ctx);
-        // this.ship = new Ship(canvasWidth, canvasHeight, ctx, this.shipBlinkDuration, this.FPS, this.shipExplodeInvDuration);
         this.keyDown = this.keyDown.bind(this);
         this.keyUp = this.keyUp.bind(this);
         this.FPS = 30;  // frames per seconds
         this.friction = 0.95; //friction of spaceship (0 - 1)
         this.asteroids = new _asteroids__WEBPACK_IMPORTED_MODULE_1__["default"](canvasWidth, canvasHeight, this.FPS, ctx, this.ship.shipSize, this.ship);
         this.showBouding = false;
-        // this.shipExplodeTime = 0;
-        // this.background.src ="";
         this.background = new Image();
         this.background.src ="./imgs/gamebackground.jpg";
         this.exploting = false;
         this.exploat = 0;
         this.frame;
-        // this.laserMax = 10; // Max number of lasers on the sceen at once. 
-        // this.laserSpeed = 500; // Speed of laser in px per second.
-
         document.addEventListener("keydown", this.keyDown);
         document.addEventListener("keyup", this.keyUp);
         this.renderItems({canwin: false});
@@ -3452,7 +3418,6 @@ class Display {
     startGame(){
         const begin = () => {
             this.frame = requestAnimationFrame(begin);
-            // this.gameSound.play();
             document.getElementById("gameOver-modal").style.display = "none";
             document.getElementById("gameWon-modal").style.display = "none";
             this.renderItems({canwin:true});
@@ -3497,7 +3462,6 @@ class Display {
     keyDown(event) {
         switch (event.keyCode) {
             case 32: //spacebar down = shoot the laser
-                // console.log("spacebar up");
                 this.shootLaser();
                 break;
             case 37: // left arrow down = rotation ship left
@@ -3515,7 +3479,6 @@ class Display {
     keyUp(event) {
         switch (event.keyCode) {
             case 32: //spacebar up = allow shooting again.
-                // console.log("spacebar up");
                 this.ship.canShoot = true;
                 break;
             case 37: // left arrow up = stop rotating ship left
@@ -3530,37 +3493,14 @@ class Display {
         }
     }
 
-    explodeShip() {
-        this.ship.explodeTime = Math.ceil(this.shipExplodeDuration * this.FPS);
-    //     this.exploting = this.shipExplodeTime > 0;
-    // console.log(this.exploting, this.shipExplodeTime);
-    
-        // this.ship.drawExplotion();
-        // console.log(this.exploat === 65);
-        // console.log("Exploded");
-        if (this.exploat === 65) {
-            // console.log(this.ship.x, this.ship.y);
-            // this.wonGame();
-            // return;
-            // this.cancelAnimationFrame(this.frame);
-        }
-    }
-    
-
-    
-
-    // newShip() {
-    //     return this.ship.drawShip();
+    // explodeShip() {
+    //     this.ship.explodeTime = Math.ceil(this.shipExplodeDuration * this.FPS);
+    //     if (this.exploat === 65) {
+    //     }
     // }
 
-
     renderItems({canwin}) {
-        //Boolean for whether the ship is exploding.
-        // let blinkOn = this.ship.blinkNum % 2 == 0;
-        // let exploding = this.ship.explodeTime > 0;
-
         //create background/canvas
-
         this.ctx.drawImage(this.background, 0, 0);
 
         //Collision bounding
@@ -3570,28 +3510,12 @@ class Display {
 
         //draw the player ship or explotion
         if (!this.exploting) {
-            // console.log("NLINK ON:", this.ship.blinkNum);
-            //    if (blinkOn) {
             this.ship.drawShip();
-            //    }
-
-            // handle blinking 
-            // if (this.ship.blinkNum > 0) {
-            //     // reduce the blink time
-            //     this.ship.blinkTime--;
-
-            //     //reduce the blink num
-            //     if (this.ship.blinkTime == 0) {
-            //         this.ship.blinkTime = Math.ceil(this.ship.shipBlinkDuration * this.FPS);
-                    // this.ship.blinkNum--;
-            //     }
-            // }
             
         } else {
             // draw the explotion
             this.ship.drawExplotion();
             this.endGame();
-            // this.exploting = false;
         }
 
 
@@ -3601,10 +3525,7 @@ class Display {
                 this.spaceShipSound.play();
                 this.ship.thrust.x += this.ship.shipThrust * Math.cos(this.ship.angle) / this.FPS;
                 this.ship.thrust.y -= this.ship.shipThrust * Math.sin(this.ship.angle) / this.FPS;
-                // if (!this.exploting){
                     this.ship.drawThrust();
-                // }
-    
             } else {
                 // this.spaceShipSound.stop();
                 this.ship.thrust.x -= this.friction * this.ship.thrust.x / this.FPS;
@@ -3615,7 +3536,6 @@ class Display {
 
         // centre dot for the ship
         this.ctx.fillStyle = "red";
-        // console.log("this.ship.x @ display", this.ship.x);
         this.ctx.fillRect(this.ship.x - 1, this.ship.y - 1, 2, 2);
 
        
@@ -3627,9 +3547,7 @@ class Display {
                     this.asteroids.roids[i].y) < this.ship.radius + this.asteroids.roids[i].radius) {
                     this.exploting = true;
                     this.exploat = 65;
-                    this.explodeShip();
-                    // this.endGame();
-                    // this.ship.drawShip();
+                    // this.explodeShip();
                 }
             }
             //rotate ship
@@ -3640,27 +3558,6 @@ class Display {
             this.ship.x += this.ship.thrust.x;
             this.ship.y += this.ship.thrust.y;
         } 
-        // else {
-        //     // this.ship.explodeTime--;
-        //     if (this.ship.explodeTime == 0) {
-        //         this.exploting = false;
-        //         // this.newShip();
-        //         // this.ship.drawShip();
-        //     } 
-        // }
-     // }
-
-
-        // if (!this.exploting) {
-        //     //rotate ship
-        //     this.ship.angle += this.ship.rotation;
-
-        //     //move the ship
-        
-        //     this.ship.x += this.ship.thrust.x;
-        //     this.ship.y += this.ship.thrust.y;
-        // }
-   
         //Draw the lasers 
         for (let i = 0; i < this.ship.lasers.length; i++) {
             this.ctx.fillStyle = "salmon";
@@ -3698,13 +3595,11 @@ class Display {
 
         // Detect when game won
         if (this.asteroids.roids.length === 0 && canwin){
-            // console.log("Won");
             this.wonGame();
         }
 
         // Move/logic lasers
         for (let i = this.ship.lasers.length - 1; i >= 0; i--) {
-            // console.log(this.ship.lasers);
 
             //calculate the distance traveled
             this.ship.lasers[i].distance += Math.sqrt(Math.pow(this.ship.lasers[i].xv, 2) + Math.pow(this.ship.lasers[i].yv, 2));
@@ -3818,7 +3713,6 @@ document.addEventListener("DOMContentLoaded", () => {
         src: ["/src/Gun+Luger.mp3"]
     });
 
-    // let game = new Display(canvasWidth, canvasHeight, ctx, spaceShipSound);
     let game;
     let gameRestart = new _display__WEBPACK_IMPORTED_MODULE_0__["default"](canvasWidth, canvasHeight, ctx, gameSound, spaceShipSound, explosionSound, shootingSound);
 
@@ -3829,9 +3723,6 @@ document.addEventListener("DOMContentLoaded", () => {
             game = new _display__WEBPACK_IMPORTED_MODULE_0__["default"](canvasWidth, canvasHeight, ctx, gameSound, spaceShipSound, explosionSound, shootingSound);
             game.startGame();
             document.querySelector("#game-canvas").focus();
-            // gameSound.play();
-            // spaceShipSound.play();
-
         }
     });
 
@@ -3854,7 +3745,6 @@ document.addEventListener("DOMContentLoaded", () => {
 __webpack_require__.r(__webpack_exports__);
 
 class Ship {
-    // constructor(canvasHeight, canvasWidth, ctx, shipBlinkDuration, FPS, shipExplodeInvDuration) {
     constructor(canvasHeight, canvasWidth, ctx) {
         this.FPS = 30;
         this.canvasHeight = canvasHeight;
@@ -3877,13 +3767,6 @@ class Ship {
         this.laserMax = 10; // Max number of lasers on the sceen at once. 
         this.laserSpeed = 500; // Speed of laser in px per second.
         this.laserDistance = 0.6; // Max distance laser can travel as fraction of the screen width.
-        // this.shipBlinkDuration = shipBlinkDuration;
-        // this.shipExplodeInvDuration = shipExplodeInvDuration;
-        // this.FPS = FPS;
-        // this.blinkNum = Math.ceil(shipExplodeInvDuration / shipBlinkDuration);
-        // this.blinkTime = Math.ceil(shipBlinkDuration + this.FPS);
-        // this.shipExplodeDuration = 0.3; //Duration of the ship explosion
-
         this.thrust = {
             x: 0,
             y: 0
@@ -3943,23 +3826,8 @@ class Ship {
         this.ctx.fill();
     }
 
-    // shootLaser() {
-    //     // create the laser object
-    //     if (this.canShoot && this.lasers.length < this.laserMax) {
-    //         this.lasers.push({
-    //             //from the nose of the ship
-    //             x: this.x + 4 / 3 * this.radius * Math.cos(this.angle),
-    //             y: this.y - 4 / 3 * this.radius * Math.sin(this.angle),
-    //             xv: this.laserSpeed * Math.cos(this.angle) / this.FPS,
-    //             yv: -this.laserSpeed * Math.sin(this.angle) / this.FPS, // negative as negative is upwards
-    //             distance: 0
-    //         });
-    //     }
-    // }
-
     drawThrust() {
         //Draw the thruster
-
         this.ctx.beginPath();
         this.ctx.fillStyle = "red";
         this.ctx.strokeStyle = "yellow";
@@ -3983,18 +3851,6 @@ class Ship {
         this.ctx.fill();
         this.ctx.stroke();
     }
-
-    // explodeShip() {
-    //     this.explodeTime = Math.ceil(this.shipExplodeDuration * this.FPS);
-    //     console.log(this.explodeTime);
-    //     // this.drawExplotion();
-    //     // this.ctx.fillStyle = "lime";
-    //     // this.ctx.strokeStyle = "lime";
-    //     // this.ctx.beginPath();
-    //     // this.ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-    //     // this.ctx.fill();
-    //     // this.ctx.stroke();
-    // }
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (Ship);
