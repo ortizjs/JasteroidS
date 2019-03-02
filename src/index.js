@@ -8,25 +8,31 @@ document.addEventListener("DOMContentLoaded", () => {
     let canvasHeight = canv.height; 
     let ctx = canv.getContext('2d'); 
 
-    // var gameSound = new Howl({
-    //     src: ["/src/background.mp3"],
-    //     buffer: true,
-    //     loop: true
-    // });
+    var gameSound = new Howl({
+        src: ["/src/background.mp3"],
+        buffer: true,
+        loop: true
+    });
 
     var spaceShipSound = new Howl({
-        src: ["/src/spaceship_sound.mp3"]
+        src: ["/src/airplane+hellfire.mp3"]
+    });
+    var explosionSound = new Howl({
+        src: ["/src/Explosion+5.mp3"]
+    });
+    var shootingSound = new Howl({
+        src: ["/src/Gun+Luger.mp3"]
     });
 
     // let game = new Display(canvasWidth, canvasHeight, ctx, spaceShipSound);
     let game;
-    let gameRestart = new Display(canvasWidth, canvasHeight, ctx, spaceShipSound);
+    let gameRestart = new Display(canvasWidth, canvasHeight, ctx, gameSound, spaceShipSound, explosionSound, shootingSound);
 
 
 
     document.addEventListener("click", (event) => {
         if (event.target.classList.contains("start")){
-            game = new Display(canvasWidth, canvasHeight, ctx, spaceShipSound);
+            game = new Display(canvasWidth, canvasHeight, ctx, gameSound, spaceShipSound, explosionSound, shootingSound);
             game.startGame();
             document.querySelector("#game-canvas").focus();
             // gameSound.play();

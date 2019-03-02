@@ -3,11 +3,14 @@ import Asteroids from "./asteroids";
 // import { Howl } from "howler";
 
 class Display {
-    constructor(canvasWidth, canvasHeight, ctx, spaceShipSound){
+    constructor(canvasWidth, canvasHeight, ctx, gameSound, spaceShipSound, explosionSound, shootingSound) {
         this.canvasWidth = canvasWidth;
         this.canvasHeight = canvasHeight;
         this.ctx = ctx;
+        this.gameSound = gameSound;
         this.spaceShipSound = spaceShipSound;
+        this.explosionSound = explosionSound;
+        this.shootingSound = shootingSound;
         // this.shipExplodeDuration = 0.3; //Duration of the ship's explotation. 
         // this.shipExplodeInvDuration = 3; //Duration of the ship's invisibility in seconds. 
         // this.shipBlinkDuration = 0.1; //Duration of the ship's blink during invisibility in seconds. 
@@ -38,6 +41,7 @@ class Display {
     startGame(){
         const begin = () => {
             this.frame = requestAnimationFrame(begin);
+            // this.gameSound.play();
             document.getElementById("gameOver-modal").style.display = "none";
             document.getElementById("gameWon-modal").style.display = "none";
             this.renderItems({canwin:true});
@@ -47,8 +51,7 @@ class Display {
 
     endGame(){
         const end = () => {
-            console.log("Debugger");
-            // debugger;
+            this.spaceShipSound.stop();
             window.cancelAnimationFrame(this.frame);
             document.getElementById("gameOver-modal").style.display = "block";
         };
@@ -57,7 +60,7 @@ class Display {
 
     wonGame(){
         const won = () => {
-            // debugger;
+            this.spaceShipSound.stop();
             window.cancelAnimationFrame(this.frame);
             document.getElementById("gameWon-modal").style.display = "block";
         };
@@ -68,6 +71,7 @@ class Display {
     shootLaser() {
         // create the laser object
         if (this.ship.canShoot && this.ship.lasers.length < this.ship.laserMax) {
+            this.shootingSound.play();
             this.ship.lasers.push({
                 //from the nose of the ship
                 x: this.ship.x + 4 / 3 * this.ship.radius * Math.cos(this.ship.angle),
@@ -271,6 +275,7 @@ class Display {
                 //detect the actual hits: 
                 // if the distance between the asteroid and the laser is less than asteroid radius the it is considered a hit.
                 if (this.asteroids.distBeteenPoints(asteroidX, asteroidY, laserX, laserY) < asteroidR){
+                    this.explosionSound.play();
                     //remove the laser
                     this.ship.lasers.splice(j, 1);
                     //remove the asteroid
@@ -356,23 +361,6 @@ class Display {
                 this.asteroids.roids[i].y = 0 - this.asteroids.roids[i].radius;
             }
         }
-
-        // //check asteroid collision
-        // if (!this.exploting) {
-        //     for (let i = 0; i < this.asteroids.roids.length; i++) {
-        //         if (this.asteroids.distBeteenPoints(this.ship.x, this.ship.y, this.asteroids.roids[i].x, 
-        //             this.asteroids.roids[i].y) < this.ship.radius + this.asteroids.roids[i].radius) {
-        //                 this.exploting = true;
-        //                 this.exploat = 65;
-        //                 this.explodeShip();
-
-        //                 // this.endGame();
-
-        //                 // this.ship.drawShip();
-        //         }
-        //     }
-
-
         
     }
 }
