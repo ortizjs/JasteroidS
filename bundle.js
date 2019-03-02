@@ -3286,7 +3286,7 @@ class Asteroids {
         this.ship = ship;
         this.x;
         this.y;
-        this.roidsNum = 1; // starting number of asteroids 
+        this.roidsNum = 20; // starting number of asteroids 
         this.roids = [];
         this.roidsVertex = 10; // average number of vertices on each asteroid
         this.roidJag = 0.6; //jaggerness of the asteroids (0 = none, 1 = lots)
